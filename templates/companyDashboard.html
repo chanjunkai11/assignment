@@ -176,7 +176,7 @@
         </div>
     </nav>
     <div class="greetings">
-        <h4>Welcome, {{ company_name }} <a href="/company/updateDetails"><button class="btn" type="submit" style="vertical-align:middle">Update</button></a></h4>
+        <h4>Welcome, {{ company_name }} <button class="btn" type="submit" style="vertical-align:middle">Update</button></h4>
         
         <div class="container">
             <div class="row">
@@ -262,6 +262,24 @@
     <script>
         new DataTable('#example');
     </script>
-
+    <script>
+  $(document).ready(function() {
+    $("button.btn").on("click", function() {
+      $.ajax({
+        url: "/company/profile",
+        type: "POST", // or "GET" depending on your backend
+        data: { value: "Update" },
+        success: function(response) {
+          // Handle the response from the server if needed
+          console.log("Server response:", response);
+        },
+        error: function(error) {
+          // Handle any errors that occur during the AJAX request
+          console.error("Error:", error);
+        }
+      });
+    });
+  });
+</script>
   </body>
 </html>
