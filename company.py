@@ -108,7 +108,7 @@ def dashboard():
             "position" : row[1],
             "education" : row[2],
             "allowance" : row[3],
-            "job_id" : row[4]
+            "id" : row[4]
         }
         user_data_list.append(user_data_dict)
     legal_link = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[0] + "_legal_file.pdf"
