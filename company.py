@@ -96,7 +96,7 @@ def dashboard():
         'pic': user_data1[9]
     }
 
-    query = "SELECT job_title, position, education, allowance FROM job_portal WHERE company_id = %s"
+    query = "SELECT job_title, position, education, allowance, job_id FROM job_portal WHERE company_id = %s"
     cursor.execute(query, (user_data1[0],))
     user_data2 = cursor.fetchall()
     cursor.close()
@@ -107,7 +107,8 @@ def dashboard():
             "job_title" : row[0],
             "position" : row[1],
             "education" : row[2],
-            "allowance" : row[3]
+            "allowance" : row[3],
+            "job_id" : row[4]
         }
         user_data_list.append(user_data_dict)
     legal_link = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[0] + "_legal_file.pdf"
