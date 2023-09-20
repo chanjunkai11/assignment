@@ -114,7 +114,7 @@ def dashboard():
 def details():
     userid = session['company_user_id']
     hq = request.form['hq']
-    hr = request.form['hr_contact']
+    hr = request.form['hr']
     pic = request.form['pic']
     legal = request.files['legal']
     epf = request.files['epf']
