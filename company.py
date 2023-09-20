@@ -213,7 +213,8 @@ def submitJobs():
         select_sql = "SELECT latest_num FROM company WHERE company_id = %s"
         cursor.execute(select_sql, (session['company_user_id']))
         num = cursor.fetchone()
-        if num is not None:
+        return f"<p>{num}</p>"
+        if num :
             latest_num = num[0]
         else:
             latest_num = 0  
