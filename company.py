@@ -260,7 +260,7 @@ def deleteJob():
     cursor.execute(select_sql, (id))
     num = cursor.fetchone()
     file_name = "com-id-" + str(num[1]) + "_job_desc_file" + str(num[0]) + ".txt"
-    s3.Bucket(custombucket).delete_object(Key=file_name)
+    # s3.Bucket(custombucket).delete_object(Key=file_name)
     delete_sql = "DELETE FROM job_portal WHERE job_id = %s"
     cursor.execute(delete_sql, (id))
     db_conn.commit()
