@@ -152,9 +152,9 @@ def jobView(job_id):
     cursor = db_conn.cursor()
     select_sql = "SELECT * from job_portal WHERE job_id = %s"
     cursor.execute(select_sql, (job_id))
-    user_data1 = cursor.fetchone()
+    user_data2 = cursor.fetchone()
     select_sql = "SELECT COUNT(*) FROM job_portal WHERE company_id = %s"
-    cursor.execute(select_sql, (user_data1[1]))
+    cursor.execute(select_sql, (user_data2[1]))
     num = cursor.fetchone()
     number_1 = num[0]
     cursor.close()
@@ -165,9 +165,9 @@ def jobView(job_id):
     transport_value = True if user_data2[4] else False
     laptop_value = True if user_data2[5] else False
     user_data = {
-        'education' : user_data1[2],
-        'job_title' : user_data1[11],
-        'position' : user_data1[12],
+        'education' : user_data2[2],
+        'job_title' : user_data2[11],
+        'position' : user_data2[12],
         'accomodation' : accomodation_value,
         'transport' : transport_value,
         'laptop': laptop_value,
@@ -178,7 +178,7 @@ def jobView(job_id):
         'allowance' : user_data2[10],
         'job_id' : job_id
     }
-    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[1] + "_job_desc_file" + number_1 + ".txt"
+    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data2[1] + "_job_desc_file" + number_1 + ".txt"
     return render_template('companyJobDetailUpdate.html', **user_data, job_txt=file_name)
 
 @company_bp.route("/SubmitjobsDetails", methods=['GET', 'POST'])
