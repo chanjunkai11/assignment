@@ -52,11 +52,10 @@
       .greetings h4 {
             font-family: Trebuchet MS, sans-serif;
             font-style: normal;
-            margin-top: 50px;
+            margin-top: 60px;
             margin-left: 80px;
             padding-bottom: 3px;
             color: #fff;
-            margin-top: 0;
             font-size: 20px; 
             font-weight: bold; 
             background-color: #800000; 
@@ -117,8 +116,9 @@
             color: black;
             border: 2px solid #555555;
             border-radius: 20px;
-            margin-left: 900px;
+            margin-left: 1175px;
             width: 100px;
+            font-size: small;
         }
         .btn:hover {
             background-color: #800000;
@@ -137,29 +137,46 @@
             color: white !important;
         }
 
-        /* Change the color of the current page number to #800000 */
-        #example_paginate .paginate_button.current a {
-            background-color: #800000 !important; /* Change the background color to #800000 */
-            color: white !important; /* Change the text color to white */
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #800000;
+            border-color: #800000;
+        }
+        #example_paginate .paginate_button.previous a,
+        #example_paginate .paginate_button.current a,
+        #example_paginate .paginate_button.next a {
+            background-color: #800000 !important;
+            color: white !important;
+            border-color: #800000 !important;
         }
         .col-md-6 button {
-            margin-left: 1160px;
-            margin-top: -3000px;
+            margin-top: -10px; /* Adjust the top margin as needed */
+            margin-bottom: 6%;
             border-radius: 20px;
-            width: 15%;
+            width: 15%; /* Adjust the width of each button */
             background-color: white;
             color: black;
             border: 2px solid #555555;
             font-size: small;
             font-family: Trebuchet MS, sans-serif;
+            margin-left: 1180px;
         }
         .col-md-6 button:hover {
-            margin-left: 1160px;
-            margin-top: -3000px;
-            border-radius: 20px;
-            width: 15%;
             background-color: #800000;
             color: white;
+            opacity: 0.95;
+        }
+        #delete {
+            border-radius: 20px;
+            width: 55%;
+            background-color: white;
+            color: black;
+        }
+        #delete:hover {
+            background-color: #800000;
+            color: white;
+            opacity: 0.95;
         }
     </style>
   </head>
@@ -237,15 +254,17 @@
                         <th>Position</th>
                         <th>Education Level</th>
                         <th>Allowance</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                   {% for item in data_list %}
-                      <tr>
+                      <tr id="row_{{ item['id'] }}">
                           <td><a href="/company/jobsDetails/{{item['id']}}">{{ item['job_title'] }}</a></td>
                           <td>{{ item['position'] }}</td>
                           <td>{{ item['education'] }}</td>
                           <td>{{ item['allowance'] }}</td>
+                          <td><button type="button" id="delete" onclick="delete_row('{{item['id']}}')">Delete</button></td>
                       </tr>
                   {% endfor %}
                 </tbody>
@@ -264,5 +283,31 @@
     <script>
         new DataTable('#example');
     </script>
+      <script>
+    function delete_row(id) {
+        $.ajax({
+            type: "POST",
+            url: "/admin/deleteJob",
+            data: {
+                job_id: id
+            },
+            success: function (response) {
+                // Assuming that the response contains a flag indicating success
+                if (response.success) {
+                    // Find the row by ID and remove it
+                    var row = document.getElementById("row_" + id);
+                    if (row) {
+                        row.remove();
+                    }
+                } else {
+                    console.error("Delete operation failed.");
+                }
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    }
+</script>
   </body>
 </html>
