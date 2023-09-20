@@ -153,10 +153,6 @@ def jobView(job_id):
     select_sql = "SELECT * from job_portal WHERE job_id = %s"
     cursor.execute(select_sql, (job_id))
     user_data2 = cursor.fetchone()
-    select_sql = "SELECT COUNT(*) FROM job_portal WHERE company_id = %s"
-    cursor.execute(select_sql, (user_data2[1]))
-    num = cursor.fetchone()
-    number_1 = num[0]
     cursor.close()
     hours = int(user_data2[8])
     minutes = int((user_data2[8] - hours) * 60)
@@ -178,7 +174,7 @@ def jobView(job_id):
         'allowance' : user_data2[10],
         'job_id' : job_id
     }
-    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(number_1) + ".txt"
+    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(user_data2[13]) + ".txt"
     return render_template('companyJobDetailUpdate.html', **user_data, job_txt=file_name)
 
 @company_bp.route("/SubmitjobsDetails", methods=['GET', 'POST'])
@@ -210,14 +206,21 @@ def submitJobs():
         cursor.execute(update_sql, (education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, session["company_job_id"]))
         db_conn.commit()
     else:
-        insert_sql = "INSERT INTO job_portal (company_id, education, accomodation, transport, laptop, start_time, end_time, hours, environment, allowance, job_title, position) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(insert_sql, (session['company_user_id'], education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position))
+        select_sql = "SELECT lates_num FROM company WHERE company_id = %s"
+        cursor.execute(select_sql, (session['company_user_id']))
+        num = cursor.fetchone()
+        if num is not None:
+            lates_num = num[0]
+        else:
+            lates_num = 0  
+        insert_sql = "INSERT INTO job_portal (company_id, education, accomodation, transport, laptop, start_time, end_time, hours, environment, allowance, job_title, position, pointer) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(insert_sql, (session['company_user_id'], education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, latest_num + 1))
         db_conn.commit()
-    select_sql = "SELECT COUNT(*) FROM job_portal WHERE company_id = %s"
-    cursor.execute(select_sql, (session['company_user_id']))
-    num = cursor.fetchone()
+        update_num = "UPDATE company SET latest_num=%s WHERE company_id = %s"
+        cursor.execute(update_num, (latest_num + 1,session['company_user_id']))
+        db_conn.commit()
     cursor.close()
-    file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + str(num[0]) + os.path.splitext(txt.filename)[1]
+    file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + str(latest_num + 1) + os.path.splitext(txt.filename)[1]
     s3 = boto3.resource('s3')
     s3.Bucket(custombucket).put_object(Key=file_name, Body=txt, ContentType="text/plain")
     return redirect(url_for('company.dashboard'))
