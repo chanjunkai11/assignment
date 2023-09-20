@@ -267,7 +267,7 @@ def deleteJob():
     cursor.execute(delete_sql, (id))
     db_conn.commit()
     cursor.close()
-    response = {'message': 'Job Deleted successfully'}
+    response = {'success': True, 'message': 'Job Deleted successfully'}
     return jsonify(response)
     
 def get_last_company_id():
