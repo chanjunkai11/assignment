@@ -202,9 +202,13 @@ def submitJobs():
 
     cursor = db_conn.cursor()
     if session["company_updating"] is not None:
+        selecting_sql = "SELECT pointer from job_portal WHERE job_id = %s"
+        cursor.execute(selecting_sql, (session["company_job_id"]))
+        num = cursor.fetchone()
         update_sql = "UPDATE job_portal SET education = %s, accomodation = %s, transport = %s, laptop = %s, start_time = %s, end_time = %s, hours = %s, environment = %s, allowance = %s, job_title = %s, position = %s WHERE job_id = %s"
         cursor.execute(update_sql, (education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, session["company_job_id"]))
         db_conn.commit()
+        file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + str(num[0]) + os.path.splitext(txt.filename)[1]
     else:
         select_sql = "SELECT latest_num FROM company WHERE company_id = %s"
         cursor.execute(select_sql, (session['company_user_id']))
@@ -219,8 +223,8 @@ def submitJobs():
         update_num = "UPDATE company SET latest_num=%s WHERE company_id = %s"
         cursor.execute(update_num, (latest_num + 1,session['company_user_id']))
         db_conn.commit()
+        file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + str(latest_num + 1) + os.path.splitext(txt.filename)[1]
     cursor.close()
-    file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + str(latest_num + 1) + os.path.splitext(txt.filename)[1]
     s3 = boto3.resource('s3')
     s3.Bucket(custombucket).put_object(Key=file_name, Body=txt, ContentType="text/plain")
     return redirect(url_for('company.dashboard'))
