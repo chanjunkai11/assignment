@@ -152,6 +152,10 @@ def jobView(job_id):
     select_sql = "SELECT * from job_portal WHERE job_id = %s"
     cursor.execute(select_sql, (job_id))
     user_data1 = cursor.fetchone()
+    select_sql = "SELECT COUNT(*) FROM job_portal WHERE company_id = %s"
+    cursor.execute(select_sql, (user_data1[1]))
+    num = cursor.fetchone()
+    number_1 = num[0]
     cursor.close()
     hours = int(user_data2[8])
     minutes = int((user_data2[8] - hours) * 60)
@@ -173,8 +177,8 @@ def jobView(job_id):
         'allowance' : user_data2[10],
         'job_id' : job_id
     }
-    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[1] + "_job_desc_file" + job_id + ".txt"
-    return render_template('companyJobDetailUpdate.html', **user_data, )
+    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[1] + "_job_desc_file" + number_1 + ".txt"
+    return render_template('companyJobDetailUpdate.html', **user_data, job_txt=file_name)
 
 @company_bp.route("/SubmitjobsDetails", methods=['GET', 'POST'])
 def submitJobs():
@@ -205,7 +209,7 @@ def submitJobs():
         cursor.execute(update_sql, (education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, session["company_job_id"]))
         db_conn.commit()
     else:
-        select_sql = "SELECT MAX(job_id) FROM job_portal WHERE company_id = %s"
+        select_sql = "SELECT COUNT(*) FROM job_portal WHERE company_id = %s"
         cursor.execute(select_sql, (session['company_user_id']))
         num = cursor.fetchone()
         session['company_job_id'] = num[0]
