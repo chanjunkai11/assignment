@@ -145,7 +145,37 @@ def jobDetails():
         session["company_updating"] = None 
         session["company_job_id"] = None
     return render_template('companyJobDetail.html')
-    
+
+@company_bp.route("/jobsDetails/<job_id>", methods=['GET', 'POST'])
+def jobView(job_id):
+    cursor = db_conn.cursor()
+    select_sql = "SELECT * from job_portal WHERE job_id = %s"
+    cursor.execute(select_sql, (job_id))
+    user_data1 = cursor.fetchone()
+    cursor.close()
+    hours = int(user_data2[8])
+    minutes = int((user_data2[8] - hours) * 60)
+    hours = f"{hours} hour(s) {minutes} minutes"
+    accomodation_value = True if user_data2[3] else False
+    transport_value = True if user_data2[4] else False
+    laptop_value = True if user_data2[5] else False
+    user_data = {
+        'education' : user_data1[2],
+        'job_title' : user_data1[11],
+        'position' : user_data1[12],
+        'accomodation' : accomodation_value,
+        'transport' : transport_value,
+        'laptop': laptop_value,
+        'start_time': format_timedelta(user_data2[6]),
+        'end_time' : format_timedelta(user_data2[7]),
+        'hours': hours,
+        'environment' : user_data2[9],
+        'allowance' : user_data2[10],
+        'job_id' : job_id
+    }
+    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[1] + "_job_desc_file" + job_id + ".txt"
+    return render_template('companyJobDetailUpdate.html', **user_data, )
+
 @company_bp.route("/SubmitjobsDetails", methods=['GET', 'POST'])
 def submitJobs():
     education = request.form['education']
@@ -173,13 +203,18 @@ def submitJobs():
     if session["company_updating"] is not None:
         upadate_sql = "UPDATE job_portal SET education = %s, accomodation = %s, transport = %s, laptop = %s, start_time = %s, end_time = %s, hours = %s, environment = %s, allowance = %s, job_title = %s, position = %s WHERE job_id = %s"
         cursor.execute(update_sql, (education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, session["company_job_id"]))
-         db_conn.commit()
+        db_conn.commit()
     else:
+        select_sql = "SELECT MAX(job_id) FROM job_portal WHERE company_id = %s"
+        cursor.execute(select_sql, (session['company_user_id']))
+        num = cursor.fetchone()
+        session['company_job_id'] = num[0]
         insert_sql = "INSERT INTO job_portal (company_id, education, accomodation, transport, laptop, start_time, end_time, hours, environment, allowance, job_title, position) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(insert_sql, (session['company_user_id'], education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position))
         db_conn.commit()
+        
     cursor.close()
-    file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + os.path.splitext(txt.filename)[1]
+    file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + str(session['company_job_id']+1) + os.path.splitext(txt.filename)[1]
     s3 = boto3.resource('s3')
     s3.Bucket(custombucket).put_object(Key=file_name, Body=txt, ContentType="text/plain")
     return redirect(url_for('company.dashboard'))
