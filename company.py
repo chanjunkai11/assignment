@@ -178,7 +178,7 @@ def jobView(job_id):
         'allowance' : user_data2[10],
         'job_id' : job_id
     }
-    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data2[1] + "_job_desc_file" + number_1 + ".txt"
+    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(number_1) + ".txt"
     return render_template('companyJobDetailUpdate.html', **user_data, job_txt=file_name)
 
 @company_bp.route("/SubmitjobsDetails", methods=['GET', 'POST'])
