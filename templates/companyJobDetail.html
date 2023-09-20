@@ -391,7 +391,7 @@
                             <input type="time" id="appt_end" name="appt_end">
                         </div>
                         <label for="hours"><strong>Work Hours:</strong></label>
-                        <input type="text" class="input" id="hours" nmae="hours" required="" autocomplete="off">
+                        <input type="text" class="input" id="hours" nmae="hours" required="" autocomplete="off" readonly>
                     </div>                    
                     <div class="label-input-container">
                         <label for="environment">Working Environment:</label>
@@ -431,7 +431,7 @@
             if (fileExtension === "txt") {
                 customTxt.innerHTML = `<a href="${URL.createObjectURL(file)}" target="_blank">${fileName}</a>`;
             } else {
-                customTxt.innerHTML = "Invalid file format. Please select a PDF file.";
+                customTxt.innerHTML = "Invalid file format. Please select a TXT file.";
                 realFileBtn.value = ""; // Clear the input field
             }
         } else {
@@ -460,6 +460,44 @@
             }
         });
    </script>
+    <script type="text/javascript">
+    // Function to calculate and autofill work hours
+    function calculateWorkHours() {
+        // Get the start and end time inputs
+        const startTimeInput = document.getElementById("appt_start");
+        const endTimeInput = document.getElementById("appt_end");
+
+        // Get the "Work Hours" input
+        const workHoursInput = document.getElementById("hours");
+
+        // Check if both start and end times are filled
+        if (startTimeInput.value && endTimeInput.value) {
+            // Convert start and end times to Date objects
+            const startTime = new Date(`2023-09-18T${startTimeInput.value}`);
+            const endTime = new Date(`2023-09-18T${endTimeInput.value}`);
+
+            // Calculate the time difference in minutes
+            const timeDifferenceMinutes = (endTime - startTime) / (1000 * 60);
+
+            // Calculate hours and minutes
+            const hours = Math.floor(timeDifferenceMinutes / 60);
+            const minutes = timeDifferenceMinutes % 60;
+
+            // Format the result as "X hours Y minutes"
+            const formattedResult = `${hours} hour(s) ${minutes} minutes`;
+
+            // Set the "Work Hours" input value
+            workHoursInput.value = formattedResult;
+        } else {
+            // Clear the "Work Hours" input if either start or end time is missing
+            workHoursInput.value = "";
+        }
+    }
+
+    // Attach the calculateWorkHours function to the change event of the time inputs
+    document.getElementById("appt_start").addEventListener("change", calculateWorkHours);
+    document.getElementById("appt_end").addEventListener("change", calculateWorkHours);
+</script>
     
 </body>
 </html>
