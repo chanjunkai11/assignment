@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> 
+    <!-- Your custom CSS styles -->
+    <style media="screen">
+        /* Your existing custom CSS styles */
+        .container {
+            width: 100%;
+            max-width: 800px; /* Adjust as needed */
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #ccc; /* Border style */
+            border-radius: 10px; /* Rounded corners */
+            background-color: whitesmoke;
+        }
+
+        .greetings h4 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            text-align: center;
+        }
+
+        .card {
+            margin-bottom: 3px;
+            padding-bottom: 1px;
+            padding-top: 20px;
+            padding-left: 15px;
+            padding-right: 15px; /* Added right padding to cards */
+            border: 1px solid #ddd; /* Border for individual cards */
+            border-radius: 5px; /* Rounded corners for cards */
+            background-color: white;
+            width: 208%;
+        }
+        .row h5 {
+            color: #fff;
+            margin-top: 0; /* Adjust margin to make it closer to content */
+            font-size: 20px; /* Adjust the font size for headings */
+            font-weight: bold; /* Make headings bold */
+            background-color: #800000; /* Highlighted background color */
+            padding: 8px; /* Adjust padding as needed */
+            width: 208%;
+        }
+
+        /* Style for Supervisor heading */
+        .supervisor-heading h5 {
+            margin-top: 0; /* Adjust margin to make it closer to content */
+        }
+
+        /* Style for the update button */
+        .update-button {
+            display: block;
+            margin: 10px auto; /* Center the button horizontally */
+            background-color: #800000;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Add transition effect */
+        }
+
+        /* Change button background on hover */
+        .update-button:hover {
+            background-color: whitesmoke; /* Change to a different color on hover */
+            color: #000;
+        }
+
+        /* Style for labels and input fields */
+        .label-input-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .label-input-container label {
+            flex: 1;
+            text-align: left;
+            margin-right: 10px;
+            font-size: small;
+        }
+
+        .label-input-container input, .label-input-container select {
+            flex: 2;
+            padding: 1px;
+            padding-left: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+        .upload label{
+            font-size: small;
+        }
+        #custom-button {
+            padding: 5px;
+            color: white;
+            background-color: #800000;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 164px;
+        }
+
+        #custom-button:hover {
+            background-color: #800000;
+            opacity: 0.6;
+        }
+
+        #custom-text {
+            margin-left: 10px;
+            font-family: sans-serif;
+            color: #aaa;
+            font-size: 14px;
+        }
+        #custom-button2 {
+            padding: 5px;
+            color: white;
+            background-color: #800000;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 35px;
+        }
+
+        #custom-button2:hover {
+            background-color: #800000;
+            opacity: 0.6;
+        }
+
+        #custom-text2 {
+            margin-left: 10px;
+            font-family: sans-serif;
+            color: #aaa;
+            font-size: 14px;
+        }
+        .submit #btn{
+            border: none;
+            outline: none;
+            background: #800000;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 600px;
+            width: 280px;
+        }
+        .submit #btn:hover{
+            background-color: #800000;
+            opacity: 0.6;
+        }
+        .nav-link {
+        font-weight: bold;
+        }
+        .navbar {
+            background: whitesmoke;
+            font-family: Arial, Helvetica, sans-serif;
+            padding-right: 15px;
+            padding-left: 15px;
+            top: 0;
+            left: 0;
+        }
+        .navdiv{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo img{
+            width: 20rem;
+            top:0;
+            left: 220px;
+            margin-right: -200px;
+        }
+        li {
+            list-style: none;
+            display: inline-block;
+        }
+        li a{
+            color:black;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 25px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navdiv">
+            <div class="logo" style="width: 134.5rem;">
+                <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>
+            </div>
+            <ul class="ml-auto"> <!-- Use ml-auto to push the list to the right -->
+                <li><a href="/student" >Home</a></li>
+                <li><a href="/"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </nav>   
+    <hr>
+<form action="/student/submitDetail" method = "POST" enctype="multipart/form-data">
+    <div class="container">
+        <div class="greetings">
+            <h4>Welcome: {{ name }}</h4>
+        </div>
+
+            <!-- Row for Student Detail -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="mb-2">Student Detail</h5>
+                <div class="card">
+                    <div class="label-input-container">
+                        <label for="fname"><strong>First Name:</strong></label>
+                        <input type="text" name="first_name" class="input" id="fname" required="" autocomplete="off" value="{{ first_name }}" readonly>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="lname"><strong>Last Name:</strong></label>
+                        <input type="text" name="last_name" class="input" id="lname" required="" autocomplete="off" value="{{ last_name }}" readonly>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="student_id"><strong>Student ID:</strong></label>
+                        <input type="text" class="input" id="student_id" required="" autocomplete="off" value="{{ id }}" readonly>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="nric_no"><strong>NRIC No.:</strong></label>
+                        <input type="text" class="input" id="nric_no" required="" autocomplete="off" value="{{ ic }}" readonly>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="student_email"><strong>Student Email:</strong></label>
+                        <input type="text" class="input" id="student_email"required="" autocomplete="off" value="{{ email }}" readonly>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="mobile_number"><strong>Mobile Number:</strong></label>
+                        <input type="text" class="input" id="mobile_number" required="" autocomplete="off" value="{{ tel_num }}" readonly>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="address"><strong>Address:</strong></label>
+                        <input type="text" class="input" id="address" required="" autocomplete="off" value="{{ address }}" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Separate container for Supervisor -->
+    <div class="container">
+        <!-- Row for Supervisor -->
+        <div class="row">
+            <div class="col-md-6 supervisor-heading">
+                <h5 class="mb-2">UC Supervisor</h5>
+                <div class="card">
+                    <div class="label-input-container">
+                        <label for="supervisor_name">UC Supervisor Name:</label>
+
+                        <select id="supervisor_name" name="supervisor_name" class="input" onchange="selectSupervisorEmail()" required>
+                            <option disabled selected value="">Select a Supervisor</option>
+                            {% for lecturer in lecturers %}
+                                <option value="{{ lecturer }}">{{ lecturer }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="supervisor_email">UC Supervisor Email:</label>
+                        <input type="text" name="supervisor_email" id="supervisor_email" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 supervisor-heading">
+                <h5 class="mb-2">Company</h5>
+                <div class="card">
+                    <div class="label-input-container">
+                        <label for="company_name">Company Name:</label>
+                        <select id="company_name" name="company_name" class="input" onchange="selectCompanyData()" required>
+                            <option disabled selected value="">Select a Comapny</option>
+                            {% for company in companies %}
+                                <option value="{{ company }}">{{ company }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="company_email">Company Email:</label>
+                        <input type="text" name="company_email" id="company_email" readonly>
+                    </div>
+                    <div class="label-input-container">
+                        <label for="company_address">Company Address:</label>
+                        <input type="text" name="company_address" id="company_address" readonly>
+                    </div>
+                    <section class="upload">
+                        <label for="Resume">Resume:</label>
+                        <input type="file" id="real-file" name="resume" hidden="hidden" />
+                        <button type="button" id="custom-button">CHOOSE A FILE</button>
+                        <span id="custom-text">No file chosen, yet.</span>
+                        <br>
+                        <label for="Com. Acceptance Form">Com. Acceptance Form:</label>
+                        <input type="file" id="real-file2" name="form" hidden="hidden" />
+                        <button type="button" id="custom-button2">CHOOSE A FILE</button>
+                        <span id="custom-text2">No file chosen, yet.</span>
+                        <br><br>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="submit">
+        <button type="submit" id="btn" value="Submit">Submit</button>
+   </div> 
+   <br><br><br>
+</form>
+   <script>
+        const realFileBtn = document.getElementById("real-file");
+        const customBtn = document.getElementById("custom-button");
+        const customTxt = document.getElementById("custom-text");
+
+        customBtn.addEventListener("click", function() {
+        realFileBtn.click();
+        });
+
+        realFileBtn.addEventListener("change", function() {
+        const file = realFileBtn.files[0];
+        if (file) {
+            const fileName = file.name;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+
+            // Check if the selected file has a PDF extension
+            if (fileExtension === "pdf") {
+                customTxt.innerHTML = `<a href="${URL.createObjectURL(file)}" target="_blank">${fileName}</a>`;
+            } else {
+                customTxt.innerHTML = "Invalid file format. Please select a PDF file.";
+                realFileBtn.value = ""; // Clear the input field
+            }
+        } else {
+            customTxt.innerHTML = "No file chosen, yet.";
+        }
+    });
+
+        const realFileBtn2 = document.getElementById("real-file2");
+        const customBtn2 = document.getElementById("custom-button2");
+        const customTxt2 = document.getElementById("custom-text2");
+
+        customBtn2.addEventListener("click", function() {
+        realFileBtn2.click();
+        });
+
+        realFileBtn2.addEventListener("change", function() {
+        const file = realFileBtn2.files[0];
+        if (file) {
+            const fileName = file.name;
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+
+            // Check if the selected file has a PDF extension
+            if (fileExtension === "pdf") {
+                customTxt2.innerHTML = `<a href="${URL.createObjectURL(file)}" target="_blank">${fileName}</a>`;
+            } else {
+                customTxt2.innerHTML = "Invalid file format. Please select a PDF file.";
+                realFileBtn2.value = ""; // Clear the input field
+            }
+        } else {
+            customTxt2.innerHTML = "No file chosen, yet.";
+        }
+    });
+
+    const submitBtn = document.getElementById("btn");
+    const errorMessage = document.getElementById("error-message");
+
+    submitBtn.addEventListener("click", function(e) {
+        const file1 = document.getElementById("real-file").files[0];
+        const file2 = document.getElementById("real-file2").files[0];
+
+        if (!file1 || !file2) {
+            Swal.fire({
+            icon: 'error', // Specify the error icon
+            title: 'Both files are required.', // Title of the alert
+            confirmButtonText: 'OK' // Text for the confirmation button
+        });
+            e.preventDefault(); // Prevent form submission
+        } 
+    });
+   </script>
+    <script>
+        function selectSupervisorEmail() {
+            // Get the selected lecturer's name
+            var selectedLecturer = document.getElementById('supervisor_name').value;
+
+            // Make an AJAX request to the Flask backend to fetch the email
+            fetch('/student/get_lecturer_email?lecturer=' + selectedLecturer)
+                .then(response => response.json())
+                .then(data => {
+                    // Populate the email field with the fetched email
+                    document.getElementById('supervisor_email').value = data.email;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+    <script>
+        function selectCompanyData() {
+            // Get the selected lecturer's name
+            var selectedCompany = document.getElementById('company_name').value;
+
+            // Make an AJAX request to the Flask backend to fetch the email
+            fetch('/student/get_company?company=' + selectedCompany)
+                .then(response => response.json())
+                .then(data => {
+                    // Populate the email field with the fetched email
+                    document.getElementById('company_email').value = data.email;
+                    document.getElementById('company_address').value = data.address;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
