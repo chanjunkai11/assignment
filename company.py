@@ -210,9 +210,9 @@ def submitJobs():
         cursor.execute(select_sql, (session['company_user_id']))
         num = cursor.fetchone()
         if num is not None:
-            lates_num = num[0]
+            latest_num = num[0]
         else:
-            lates_num = 0  
+            latest_num = 0  
         insert_sql = "INSERT INTO job_portal (company_id, education, accomodation, transport, laptop, start_time, end_time, hours, environment, allowance, job_title, position, pointer) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(insert_sql, (session['company_user_id'], education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, latest_num + 1))
         db_conn.commit()
