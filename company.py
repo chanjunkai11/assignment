@@ -206,7 +206,7 @@ def submitJobs():
 
     cursor = db_conn.cursor()
     if session["company_updating"] is not None:
-        upadate_sql = "UPDATE job_portal SET education = %s, accomodation = %s, transport = %s, laptop = %s, start_time = %s, end_time = %s, hours = %s, environment = %s, allowance = %s, job_title = %s, position = %s WHERE job_id = %s"
+        update_sql = "UPDATE job_portal SET education = %s, accomodation = %s, transport = %s, laptop = %s, start_time = %s, end_time = %s, hours = %s, environment = %s, allowance = %s, job_title = %s, position = %s WHERE job_id = %s"
         cursor.execute(update_sql, (education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, session["company_job_id"]))
         db_conn.commit()
     else:
