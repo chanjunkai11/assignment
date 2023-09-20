@@ -138,8 +138,14 @@ def details():
 
 @company_bp.route("/jobsDetails", methods=['GET', 'POST'])
 def jobDetails():
+    try:
+        session["company_updating"] = request.form['update']
+        session["company_job_id"] = request.form['job_id']
+    except BadRequest:
+        session["company_updating"] = None 
+        session["company_job_id"] = None
     return render_template('companyJobDetail.html')
-
+    
 @company_bp.route("/SubmitjobsDetails", methods=['GET', 'POST'])
 def submitJobs():
     education = request.form['education']
@@ -164,9 +170,14 @@ def submitJobs():
         hours = round(hours + minutes / 60.0, 2)
 
     cursor = db_conn.cursor()
-    update_sql = "INSERT INTO job_portal (company_id, education, accomodation, transport, laptop, start_time, end_time, hours, environment, allowance, job_title, position) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    cursor.execute(update_sql, (session['company_user_id'], education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position))
-    db_conn.commit()
+    if session["company_updating"] is not None:
+        upadate_sql = "UPDATE job_portal SET education = %s, accomodation = %s, transport = %s, laptop = %s, start_time = %s, end_time = %s, hours = %s, environment = %s, allowance = %s, job_title = %s, position = %s WHERE job_id = %s"
+        cursor.execute(update_sql, (education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, session["company_job_id"]))
+         db_conn.commit()
+    else:
+        insert_sql = "INSERT INTO job_portal (company_id, education, accomodation, transport, laptop, start_time, end_time, hours, environment, allowance, job_title, position) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(insert_sql, (session['company_user_id'], education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position))
+        db_conn.commit()
     cursor.close()
     file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + os.path.splitext(txt.filename)[1]
     s3 = boto3.resource('s3')
