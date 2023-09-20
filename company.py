@@ -210,16 +210,14 @@ def submitJobs():
         cursor.execute(update_sql, (education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, session["company_job_id"]))
         db_conn.commit()
     else:
-        select_sql = "SELECT COUNT(*) FROM job_portal WHERE company_id = %s"
-        cursor.execute(select_sql, (session['company_user_id']))
-        num = cursor.fetchone()
-        session['company_job_id'] = num[0]
         insert_sql = "INSERT INTO job_portal (company_id, education, accomodation, transport, laptop, start_time, end_time, hours, environment, allowance, job_title, position) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(insert_sql, (session['company_user_id'], education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position))
         db_conn.commit()
-        
+    select_sql = "SELECT COUNT(*) FROM job_portal WHERE company_id = %s"
+    cursor.execute(select_sql, (session['company_user_id']))
+    num = cursor.fetchone()
     cursor.close()
-    file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + str(session['company_job_id']+1) + os.path.splitext(txt.filename)[1]
+    file_name = "com-id-" + str(session['company_user_id']) + "_job_desc_file" + str(num[0]) + os.path.splitext(txt.filename)[1]
     s3 = boto3.resource('s3')
     s3.Bucket(custombucket).put_object(Key=file_name, Body=txt, ContentType="text/plain")
     return redirect(url_for('company.dashboard'))
