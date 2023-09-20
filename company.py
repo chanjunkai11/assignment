@@ -214,7 +214,7 @@ def submitJobs():
         cursor.execute(select_sql, (session['company_user_id']))
         num = cursor.fetchone()
         return f"<p>{num}</p>"
-        if num :
+        if num[0] is not None:
             latest_num = num[0]
         else:
             latest_num = 0  
