@@ -58,6 +58,10 @@ def logout():
 
 @company_bp.route("/profile", methods=['GET', 'POST'])
 def profile():
+    try:
+        updating = request.form['value']
+    except BadRequest:
+        updating = None 
     username = session['company_user_id']
     cursor = db_conn.cursor()
     query = "SELECT * FROM company WHERE company_id = %s"
@@ -71,7 +75,7 @@ def profile():
         'address' : user_data1[2]
     }
     cursor.close()
-    if user_data1[5]:
+    if user_data1[5] and updating is None:
         return redirect(url_for('company.dashboard'))
     return render_template('companyDetail.html', **user_data)
 
