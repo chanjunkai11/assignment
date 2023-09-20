@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, session
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, session, jsonify
 from werkzeug.exceptions import BadRequest
 from pymysql import connections
 import os
