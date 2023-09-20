@@ -206,7 +206,7 @@ def submitJobs():
         cursor.execute(update_sql, (education, accomodation_value, transport_value, laptop_value, appt_start, appt_end, hours, environment, allowance, job_title, position, session["company_job_id"]))
         db_conn.commit()
     else:
-        select_sql = "SELECT lates_num FROM company WHERE company_id = %s"
+        select_sql = "SELECT latest_num FROM company WHERE company_id = %s"
         cursor.execute(select_sql, (session['company_user_id']))
         num = cursor.fetchone()
         if num is not None:
