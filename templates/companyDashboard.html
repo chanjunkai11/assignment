@@ -313,14 +313,11 @@
     }
 
     function updateEntryCount() {
-        // Get the DataTable instance
-        var table = new DataTable('#example');
-
-        // Get page information
+        // Get page information from the DataTable instance
         var pageInfo = table.page.info();
 
         // Update the entry count directly in the existing element
-        var entryCountElement = $('#entriesInfo');
+        var entryCountElement = $('#example_info');
         var entryCountText = 'Showing ' + (pageInfo.start + 1) + ' to ' + pageInfo.end + ' of ' + pageInfo.recordsDisplay + ' entries';
         entryCountElement.text(entryCountText);
 
@@ -329,11 +326,6 @@
             entryCountElement.text('No records found.');
         }
     }
-
-    // Call updateEntryCount when the page loads
-    $(document).ready(function () {
-        updateEntryCount();
-    });
 </script>
   </body>
 </html>
