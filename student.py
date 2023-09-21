@@ -8,6 +8,7 @@ from itertools import chain
 from config import *
 from functools import wraps
 from datetime import timedelta
+import requests
 
 student_bp = Blueprint('student', __name__)
 
@@ -227,8 +228,9 @@ def studJob():
     s3 = boto3.resource('s3')
     s3_object_url = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + str(session["user_id"]) + "_pfp.png"
     try:
-        s3.head_object(Bucket=s3_bucket_name, Key=s3_object_key)
-    except botocore.exceptions.ClientError as e:
-        if e.response['Error']['Code'] == '404':
+        response = requests.get(s3_object_url)
+        if response.status_code == 404:
             s3_object_url = '/assets/img/noprofil.jpg'
+    except requests.exceptions.RequestException as e:
+        print("")
     return render_template('studentView.html', card_data=user_data_list, student_name=user_data2[0], stud_pfp=s3_object_url)
