@@ -256,10 +256,10 @@
         <div class="row" id="company-cards">
             {% for card in card_data %}
                 <div class="card">
-                        <img src="{{ company_img }}">
-                        <h4 style="font-weight: bold;">{{ company_name }}</h4>
-                        <p>{{ job_title }}</p>
-                        <p><a href="{{ job_link }}"><button>Browse Jobs</button></a></p>
+                        <img src="{{ card['company_img'] }}">
+                        <h4 style="font-weight: bold;">{{ card['company_name'] }}</h4>
+                        <p>{{ card['job_title'] }}</p>
+                        <p><a href="/student/jobDes/{{ card['job_link'] }}"><button>Browse Jobs</button></a></p>
                 </div>
             {% endfor %}
     </div>
