@@ -3,7 +3,7 @@ from werkzeug.exceptions import BadRequest
 from pymysql import connections
 import os
 import boto3
-from botocore.exceptions import NoCredentialsError, PartialCredentialsError, EndpointConnectionError
+import botocore.exceptions
 from itertools import chain
 from config import *
 from functools import wraps
