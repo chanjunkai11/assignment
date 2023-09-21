@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" charset="utf-8"></script>
     <style>
         .nav-link {
         font-weight: bold;
@@ -92,20 +93,32 @@
         justify-content: space-between; /* Distribute space between items */
         }
 
-        .card {
-        /* Your existing styles */
+        /* .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         max-width: 300px;
-        height: 400px; /* Set a fixed height for all cards */
+        height: 400px; 
         width: calc(33.33% - 5px);
         text-align: center;
         font-family: arial;
-        margin-right: 20px; /* Increased margin for closer spacing */
-        margin-bottom: 20px; /* Added margin for closer spacing */
+        margin-right: 20px; 
+        margin-bottom: 20px; 
         display: flex;
         flex-direction: column;
-        overflow: hidden; /* Hide overflowing content */
-        }
+        overflow: hidden; 
+        } */
+
+        .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 300px; /* Set a fixed width for all cards */
+    height: 400px; /* Set a fixed height for all cards */
+    margin: 10px; /* Add margin to create spacing between cards */
+    text-align: center;
+    font-family: arial;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Hide overflowing content */
+}
+
 
         .card img {
         width: 100%; /* Ensure the image takes the full width of the card */
@@ -165,6 +178,54 @@
                 color: #8B0000;
                 text-decoration: line-through;
         }
+        .pagination {
+            text-align: center;
+            margin-left: auto;
+            margin-right: 600px;
+            margin-top: 30px;
+            user-select: none;
+        }
+        .pagination li{
+            /* display: inline-block; */
+            margin: 5px;
+            /* box-shadow: 0 5px 25px rgb(1 1 1 / 10%); */
+        }
+        .pagination li a{
+            color: #000;
+            text-decoration: none;
+            font-size: 1.0em;
+            line-height: 25px;
+        }
+        .previous-page, .next-page{
+            /* background: #800000; */
+            width: 50px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .previous-page:hover{
+            transform: translateX(-5px);
+        }
+        .next-page:hover{
+            transform: translateX(-5px);
+        }
+        .page-item.active .page-link {
+            background-color: #800000;
+            color: #fff;
+            border-color: #fff;
+        }
+        .current-page, .dots{
+            background: #ccc;
+            width: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .active{
+            background: #800000;
+        }
+        .disable{
+            background: #ccc;
+        } 
 </style>
 </head>
   <body>
@@ -182,7 +243,7 @@
     <div class="upload">
         <img id="preview" src="assets/img/noprofil.jpg" width="100" height="100" alt="">
         <div class="round">
-          <input type="file" id="imageInput" accept="image/*">
+          <input type="file" id="imageInput" accept="image/*" />
           <i class="fa fa-camera" style="color: #fff;"></i>
         </div>
       </div>
@@ -191,14 +252,14 @@
     </div>
     <div class="slogan">- BELIEVE <span>YOU</span> ARE STRONGER THAN <span>YOU</span> KNOW -</div>
     <br>
-    <div class="image-container">
-        <div class="row">
+    <div class="image-container">      
+        <div class="row" id="company-cards">
                 <div class="card">
-                    <img src="assets/img/company-1.jpg">
-                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
-                    <p>Data Scientist</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-              </div>
+                        <img src="assets/img/company-1.jpg">
+                        <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
+                        <p>Data Scientist</p>
+                        <p><a href="#"><button>Browse Jobs</button></a></p>
+                </div>
             
                 <div class="card">
                     <img src="assets/img/company-2.jpg">
@@ -220,8 +281,6 @@
                     <p>Experience success with us and unlock new horizons.</p>
                     <p><a href="#"><button>Browse Jobs</button></a></p>
                 </div>  
-         </div>
-         <div class="row">
                 <div class="card">
                     <img src="assets/img/company-5.jpg">
                     <h3 style="font-weight: bold;">Financial Growth Partners</h3>
@@ -249,9 +308,116 @@
                     <p>IT Manager</p>
                     <p><a href="#"><button>Browse Jobs</button></a></p>
                 </div>  
+                <div class="card">
+                    <img src="assets/img/company-1.jpg">
+                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
+                    <p>Data Scientist</p>
+                    <p><a href="#"><button>Browse Jobs</button></a></p>
+                </div>
+                <div class="card">
+                    <img src="assets/img/company-1.jpg">
+                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
+                    <p>Data Scientist</p>
+                    <p><a href="#"><button>Browse Jobs</button></a></p>
+                </div>
+                <div class="card">
+                    <img src="assets/img/company-1.jpg">
+                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
+                    <p>Data Scientist</p>
+                    <p><a href="#"><button>Browse Jobs</button></a></p>
+                </div>
+                <div class="card">
+                    <img src="assets/img/company-1.jpg">
+                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
+                    <p>Data Scientist</p>
+                    <p><a href="#"><button>Browse Jobs</button></a></p>
+                </div>
+                <div class="card">
+                    <img src="assets/img/company-1.jpg">
+                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
+                    <p>Data Scientist</p>
+                    <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>
+        
+            <div class="card">
+                <img src="assets/img/company-2.jpg">
+                <h3 style="font-weight: bold;">Tech Innovators Inc.</h3>
+                <p>Accountant</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>
+        
+            <div class="card">
+                <img src="assets/img/company-3.jpg">
+                <h3 style="font-weight: bold;">Global Logistics Solutions</h3>
+                <p>Audit</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>
+        
+            <div class="card">
+                <img src="assets/img/company-4.jpg">
+                <h3 style="font-weight: bold;">Creative Designs Co.</h3>
+                <p>Experience success with us and unlock new horizons.</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>  
+            <div class="card">
+                <img src="assets/img/company-5.jpg">
+                <h3 style="font-weight: bold;">Financial Growth Partners</h3>
+                <p>Senior Executive Audit</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>
+        
+            <div class="card">
+                <img src="assets/img/company-6.jpg">
+                <h3 style="font-weight: bold;">Eco-Friendly Energy Solutions</h3>
+                <p>Tecnician</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>
+        
+            <div class="card">
+                <img src="assets/img/company-7.jpg">
+                <h3 style="font-weight: bold;">Precision Engineering Group</h3>
+                <p>Software Engineer</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>
+        
+            <div class="card">
+                <img src="assets/img/company-8.jpg">
+                <h3 style="font-weight: bold;">HealthTech Solutions LLC</h3>
+                <p>IT Manager</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>  
+            <div class="card">
+                <img src="assets/img/company-4.jpg">
+                <h3 style="font-weight: bold;">Creative Designs Co.</h3>
+                <p>Experience success with us and unlock new horizons.</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>  
+            <div class="card">
+                <img src="assets/img/company-5.jpg">
+                <h3 style="font-weight: bold;">Financial Growth Partners</h3>
+                <p>Senior Executive Audit</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>
+        
+            <div class="card">
+                <img src="assets/img/company-6.jpg">
+                <h3 style="font-weight: bold;">Eco-Friendly Energy Solutions</h3>
+                <p>Tecnician</p>
+                <p><a href="#"><button>Browse Jobs</button></a></p>
+            </div>
+    </div>
+         <div class="pagination">
+            <li class="page-item previous-page disable"><a href="#" class="page-link">Prev</a></li>
+                <li class="page-item current-page active"><a href="#" class="page-link">1</a></li>
+                <li class="page-item dots"><a href="#" class="page-link">...</a></li>
+                <li class="page-item current-page"><a href="#" class="page-link">5</a></li>
+                <li class="page-item current-page"><a href="#" class="page-link">6</a></li>
+                <li class="page-item dots"><a href="#" class="page-link">...</a></li>
+                <li class="page-item current-page"><a href="#" class="page-link">10</a></li>
+                <li class="page-item next-page"><a href="#" class="page-link">Next</a></li>
          </div>
     </div>
-    <script>
+    <script type="text/javascript">
         // Get references to elements
         const imageInput = document.getElementById('imageInput');
         const preview = document.getElementById('preview');
@@ -273,6 +439,64 @@
             reader.readAsDataURL(file);
           }
         });
-      </script>
+
+        $(document).ready(function () {
+    const cards = $(".card");
+    const cardsPerPage = 8;
+    let currentPage = 1;
+
+    function showPage(page) {
+        cards.hide();
+        cards.slice((page - 1) * cardsPerPage, page * cardsPerPage).show();
+    }
+
+    function updatePaginationButtons() {
+        const totalPages = Math.ceil(cards.length / cardsPerPage);
+        const pagination = $(".pagination");
+
+        pagination.empty();
+
+        if (totalPages > 1) {
+            pagination.append(
+                '<li class="page-item previous-page"><a class="page-link" href="#">Prev</a></li>'
+            );
+
+            for (let i = 1; i <= totalPages; i++) {
+                pagination.append(
+                    `<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link" href="#">${i}</a></li>`
+                );
+            }
+
+            pagination.append(
+                '<li class="page-item next-page"><a class="page-link" href="#">Next</a></li>'
+            );
+
+            $(".pagination li").on("click", function () {
+                if ($(this).hasClass("previous-page")) {
+                    currentPage--;
+                } else if ($(this).hasClass("next-page")) {
+                    currentPage++;
+                } else {
+                    currentPage = parseInt($(this).text());
+                }
+
+                showPage(currentPage);
+                updatePaginationButtons();
+            });
+        }
+
+        $(".previous-page").toggleClass("disable", currentPage === 1);
+        $(".next-page").toggleClass(
+            "disable",
+            currentPage === totalPages || totalPages === 0
+        );
+    }
+
+    showPage(currentPage);
+    updatePaginationButtons();
+});
+
+    </script>
+    
   </body>
 </html>
