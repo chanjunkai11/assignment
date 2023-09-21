@@ -123,13 +123,15 @@ def details():
     pic = request.form['pic']
     legal = request.files['legal']
     epf = request.files['epf']
+    pfp = request.files['pfp']
 
     cursor = db_conn.cursor()
     update_sql = "UPDATE company SET hq = %s, hr_contact = %s, person_incharge = %s, uploaded = %s WHERE company_id = %s"
     cursor.execute(update_sql, (hq, hr, pic, 1, userid))
     db_conn.commit()
     cursor.close()
-    
+
+    pfp_file_name = "com-id-" + str(userid) + "_pfp_img" + os.path.splitext(legal.filename)[1]
     legal_file_name = "com-id-" + str(userid) + "_legal_file" + os.path.splitext(legal.filename)[1]
     epf_file_name = "com-id-" + str(userid) + "_epf_file" + os.path.splitext(epf.filename)[1]
     s3 = boto3.resource('s3')
