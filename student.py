@@ -49,7 +49,7 @@ def valLogin():
     cursor.close()
     if user_data:
         session['user_id'] = user_data[1]
-        return redirect(url_for('student.profile'))
+        return redirect(url_for('student.studJob'))
     else:
         return "User not found"
 
