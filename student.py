@@ -312,6 +312,11 @@ def applyJob():
     cursor.close()
     return jsonify({"success": True, "message": "Successfully applied for this job."})
 
+@student_bp.route("/applyJobDashboard", methods=['GET', 'POST'])
+def applyJobdashboard():
+    
+    return render_template('studentAppliedJobs.html')
+    
 def format_timedelta(td):
     # Extract hours, minutes, and seconds components
     hours, remainder = divmod(td.seconds, 3600)
