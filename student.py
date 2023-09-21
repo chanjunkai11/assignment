@@ -343,7 +343,7 @@ def applyJobdashboard():
             "contact": row[5]
         }
         user_data_list.append(user_data_dict)
-    select_sql = "SELECT CONCAT(first_name, ' ', last_name) FROM student WHERE stude_id = %s"
+    select_sql = "SELECT CONCAT(first_name, ' ', last_name) FROM student WHERE stud_id = %s"
     cursor.execute(select_sql, (session['user_id']))
     user_name = cursor.fetchone()
     cursor.close()
