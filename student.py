@@ -366,8 +366,8 @@ def applyJobdashboard():
 def deleteJob():
     id = request.form['job_id']
     cursor = db_conn.cursor()
-    delete_sql = "DELETE FROM applied_job WHERE job_id = %s AND stud_id = %s"
-    cursor.execute(delete_sql, (id, session['user_id']))
+    delete_sql = "DELETE FROM applied_job WHERE applied_id = %s"
+    cursor.execute(delete_sql, (id))
     db_conn.commit()
     cursor.close()
     response = {'success': True, 'message': 'Job Deleted successfully'}
