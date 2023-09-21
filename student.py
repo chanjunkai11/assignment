@@ -199,5 +199,20 @@ def registerAcc():
 
 @student_bp.route("/jobBrowsing", methods=['GET', 'POST'])
 def studJob():
+    select_sql = "SELECT company.company_name, company.company_id, job_portal.job_title, job_portal.job_id FROM job_portal INNER JOIN company ON job_portal.company_id = company.id"
+    cursor = db_conn.cursor()
+    cursor.execute(select_sql)
+    user_data = cursor.fetchall()
+    cursor.close()
     
+    user_data_list = []
+    for row in user_data:
+        company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + row[1] + "_img.png"
+        user_data_dict = {
+            "company_name": row[0],
+            "job_title": row[2],
+            "job_link": row[2],
+            "company_img" : company_img
+        }
+        user_data_list.append(user_data_dict)
     return render_template('studentView.html')
