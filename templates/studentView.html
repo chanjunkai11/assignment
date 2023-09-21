@@ -232,16 +232,16 @@
     <nav class="navbar">
         <div class="navdiv">
             <div class="logo" style="width: 134.5rem;">
-                <a href="index.html"><img src="assets/img/TARUMT.png" alt="" class="img-fluid"></a>
+                <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>
             </div>
             <ul class="ml-auto"> <!-- Use ml-auto to push the list to the right -->
-                <li><a href="company.html">Home</a></li>
-                <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/"><span class="glyphicon glyphicon-log-out"></span></a></li>
             </ul>
         </div>
     </nav>
     <div class="upload">
-        <img id="preview" src="assets/img/noprofil.jpg" width="100" height="100" alt="">
+        <img id="preview" src="/assets/img/noprofil.jpg" width="100" height="100" alt="">
         <div class="round">
           <input type="file" id="imageInput" accept="image/*" />
           <i class="fa fa-camera" style="color: #fff;"></i>
@@ -254,157 +254,14 @@
     <br>
     <div class="image-container">      
         <div class="row" id="company-cards">
+            {% for card in card_data %}
                 <div class="card">
-                        <img src="assets/img/company-1.jpg">
-                        <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
-                        <p>Data Scientist</p>
-                        <p><a href="#"><button>Browse Jobs</button></a></p>
+                        <img src="{{ company_img }}">
+                        <h4 style="font-weight: bold;">{{ company_name }}</h4>
+                        <p>{{ job_title }}</p>
+                        <p><a href="{{ job_link }}"><button>Browse Jobs</button></a></p>
                 </div>
-            
-                <div class="card">
-                    <img src="assets/img/company-2.jpg">
-                    <h3 style="font-weight: bold;">Tech Innovators Inc.</h3>
-                    <p>Accountant</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>
-            
-                <div class="card">
-                    <img src="assets/img/company-3.jpg">
-                    <h3 style="font-weight: bold;">Global Logistics Solutions</h3>
-                    <p>Audit</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>
-            
-                <div class="card">
-                    <img src="assets/img/company-4.jpg">
-                    <h3 style="font-weight: bold;">Creative Designs Co.</h3>
-                    <p>Experience success with us and unlock new horizons.</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>  
-                <div class="card">
-                    <img src="assets/img/company-5.jpg">
-                    <h3 style="font-weight: bold;">Financial Growth Partners</h3>
-                    <p>Senior Executive Audit</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>
-            
-                <div class="card">
-                    <img src="assets/img/company-6.jpg">
-                    <h3 style="font-weight: bold;">Eco-Friendly Energy Solutions</h3>
-                    <p>Tecnician</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>
-            
-                <div class="card">
-                    <img src="assets/img/company-7.jpg">
-                    <h3 style="font-weight: bold;">Precision Engineering Group</h3>
-                    <p>Software Engineer</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>
-            
-                <div class="card">
-                    <img src="assets/img/company-8.jpg">
-                    <h3 style="font-weight: bold;">HealthTech Solutions LLC</h3>
-                    <p>IT Manager</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>  
-                <div class="card">
-                    <img src="assets/img/company-1.jpg">
-                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
-                    <p>Data Scientist</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>
-                <div class="card">
-                    <img src="assets/img/company-1.jpg">
-                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
-                    <p>Data Scientist</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>
-                <div class="card">
-                    <img src="assets/img/company-1.jpg">
-                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
-                    <p>Data Scientist</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>
-                <div class="card">
-                    <img src="assets/img/company-1.jpg">
-                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
-                    <p>Data Scientist</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-                </div>
-                <div class="card">
-                    <img src="assets/img/company-1.jpg">
-                    <h3 style="font-weight: bold;">Giordano Sdn Bhd</h3>
-                    <p>Data Scientist</p>
-                    <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>
-        
-            <div class="card">
-                <img src="assets/img/company-2.jpg">
-                <h3 style="font-weight: bold;">Tech Innovators Inc.</h3>
-                <p>Accountant</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>
-        
-            <div class="card">
-                <img src="assets/img/company-3.jpg">
-                <h3 style="font-weight: bold;">Global Logistics Solutions</h3>
-                <p>Audit</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>
-        
-            <div class="card">
-                <img src="assets/img/company-4.jpg">
-                <h3 style="font-weight: bold;">Creative Designs Co.</h3>
-                <p>Experience success with us and unlock new horizons.</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>  
-            <div class="card">
-                <img src="assets/img/company-5.jpg">
-                <h3 style="font-weight: bold;">Financial Growth Partners</h3>
-                <p>Senior Executive Audit</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>
-        
-            <div class="card">
-                <img src="assets/img/company-6.jpg">
-                <h3 style="font-weight: bold;">Eco-Friendly Energy Solutions</h3>
-                <p>Tecnician</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>
-        
-            <div class="card">
-                <img src="assets/img/company-7.jpg">
-                <h3 style="font-weight: bold;">Precision Engineering Group</h3>
-                <p>Software Engineer</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>
-        
-            <div class="card">
-                <img src="assets/img/company-8.jpg">
-                <h3 style="font-weight: bold;">HealthTech Solutions LLC</h3>
-                <p>IT Manager</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>  
-            <div class="card">
-                <img src="assets/img/company-4.jpg">
-                <h3 style="font-weight: bold;">Creative Designs Co.</h3>
-                <p>Experience success with us and unlock new horizons.</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>  
-            <div class="card">
-                <img src="assets/img/company-5.jpg">
-                <h3 style="font-weight: bold;">Financial Growth Partners</h3>
-                <p>Senior Executive Audit</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>
-        
-            <div class="card">
-                <img src="assets/img/company-6.jpg">
-                <h3 style="font-weight: bold;">Eco-Friendly Energy Solutions</h3>
-                <p>Tecnician</p>
-                <p><a href="#"><button>Browse Jobs</button></a></p>
-            </div>
+            {% endfor %}
     </div>
          <div class="pagination">
             <li class="page-item previous-page disable"><a href="#" class="page-link">Prev</a></li>
