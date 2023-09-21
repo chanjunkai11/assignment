@@ -131,7 +131,7 @@ def details():
     db_conn.commit()
     cursor.close()
 
-    pfp_file_name = "com-id-" + str(userid) + "_pfp_img" + os.path.splitext(legal.filename)[1]
+    pfp_file_name = "com-id-" + str(userid) + "_pfp_img" + os.path.splitext(pfp.filename)[1]
     legal_file_name = "com-id-" + str(userid) + "_legal_file" + os.path.splitext(legal.filename)[1]
     epf_file_name = "com-id-" + str(userid) + "_epf_file" + os.path.splitext(epf.filename)[1]
     s3 = boto3.resource('s3')
