@@ -3,6 +3,7 @@ from werkzeug.exceptions import BadRequest
 from pymysql import connections
 import os
 import boto3
+from botocore.exceptions import NoCredentialsError, PartialCredentialsError, EndpointConnectionError
 from itertools import chain
 from config import *
 from functools import wraps
@@ -206,8 +207,12 @@ def studJob():
     cursor = db_conn.cursor()
     cursor.execute(select_sql)
     user_data = cursor.fetchall()
+
+    select_sql = "SELECT CONCAT(first_name, ' ', last_name) FROM student WHERE stud_id = %s"
+    cursor.execute(select_sql, (session["user_id"]))
+    user_data2 = cursor.fetchone()
     cursor.close()
-    
+
     user_data_list = []
     for row in user_data:
         company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + row[1] + "_pfp_img.png"
@@ -218,4 +223,13 @@ def studJob():
             "company_img" : company_img
         }
         user_data_list.append(user_data_dict)
-    return render_template('studentView.html', card_data=user_data_list)
+    s3 = boto3.resource('s3')
+    s3_object_url = f'https://{s3_bucket_name}.s3.amazonaws.com/{s3_object_key}'
+    s3_object_url = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + str(session["user_id"]) + "_pfp.png"
+    try:
+        # Send a HEAD request to the S3 object URL
+        s3.head_object(Bucket=s3_bucket_name, Key=s3_object_key)
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == '404':
+            s3_object_url = '/assets/img/noprofil.jpg'
+    return render_template('studentView.html', card_data=user_data_list, student_name=user_data2[0], )
