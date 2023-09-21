@@ -298,6 +298,19 @@ def browseJob(job_id):
     return render_template('browseJob.html', **user_data)
 
 @student_bp.route("/applyJob", methods=['POST'])
+def applyJob():
+    id = request.form['job_id']
+    cursor = db_conn.cursor()
+    select_sql = "SELECT COUNT(*) FROM applied_job WHERE stud_id = %s AND job_id = %s"
+    cursor.execute(select_sql, (session['user_id'], id))
+    user_data = cursor.fetchone()
+    if user_data[0] > 0:
+        cursor.close()
+        return jsonify({"success": False, "message": "You have already applied for this job."})
+    insert_sql = "INSERT INTO applied_job (stud_id, job_id) VALUES (%s, %s)"
+    cursor.execute(insert_sql, (session['user_id'], id))
+    cursor.close()
+    return jsonify({"success": True, "message": "Successfully applied for this job."})
 
 def format_timedelta(td):
     # Extract hours, minutes, and seconds components
