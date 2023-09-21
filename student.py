@@ -314,8 +314,39 @@ def applyJob():
 
 @student_bp.route("/applyJobDashboard", methods=['GET', 'POST'])
 def applyJobdashboard():
-    
-    return render_template('studentAppliedJobs.html')
+    select_sql = """
+                    SELECT company.company_name, 
+                    job_portal.job_title, 
+                    job_portal.position, 
+                    company.person_incharge, 
+                    company.email, 
+                    company.hr_contact, 
+                    applied_job.applied_id
+                    FROM applied_job
+                    INNER JOIN company ON applied_job.company_id = company.company_id
+                    INNER JOIN student ON applied_job.stud_id = student.stud_id
+                    WHERE applied_job.stud_id = %s
+                  """
+    cursor = db_conn.cursor()
+    cursor.execute(select_sql, (session['user_id']))
+    user_data = cursor.fetchall()
+    user_data_list = []
+    for row in user_data:
+        user_data_dict = {
+            "company_name": row[0],
+            "job_title": row[1],
+            "id": row[6],
+            "position": row[2],
+            "pic": row[3],
+            "email": row[4],
+            "contact": row[5]
+        }
+        user_data_list.append(user_data_dict)
+    select_sql = "SELECT CONCAT(first_name, ' ', last_name) FROM student WHERE stude_id = %s"
+    cursor.execute(select_sql, (session['user_id']))
+    user_name = cursor.fetchone()
+    cursor.close()
+    return render_template('studentAppliedJobs.html', data_list=user_data_list, name=user_name)
     
 def format_timedelta(td):
     # Extract hours, minutes, and seconds components
