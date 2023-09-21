@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Jobs</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style> 
+       .nav-link {
+        font-weight: bold;
+        }
+        .navbar {
+            background: whitesmoke;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 15px;
+            top: 0;
+            left: 0;
+        }
+        .navdiv{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo img{
+            width: 20rem;
+            top:0;
+            left: 220px;
+            margin-right: -170px;
+        }
+        li {
+            list-style: none;
+            display: inline-block;
+        }
+        li a{
+            color:black;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 15px;
+        }    
+        .upload{
+        width: 100px;
+        position: relative;
+        margin-top: 60px;
+        margin-left: 480px;
+        }
+        .upload img{
+        border-radius: 50%;
+        border: 6px solid #eaeaea;
+        }
+        .greetings p {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin-top: -60px;
+            margin-left: 200px;
+            font-size: 30px;
+            margin-bottom: 60px;
+        }
+        .container h4 {
+            color: #000;
+            margin-top: 0; 
+            font-size: 20px; 
+            font-weight: bold;  
+            width: 100%;
+        }
+        .container p {
+            color: #000;
+            margin-top: 0; 
+            font-size: 18px; 
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .container h5 {
+            color: #fff;
+            margin-top: 0; 
+            font-size: 20px; 
+            font-weight: bold; 
+            text-decoration: underline;
+            background-color: #800000; 
+            padding: 8px; 
+            width: 100%;
+        }
+        .company label{
+            margin-top: 20px;
+            font-size: small;
+            margin-left: 40px;
+            font-weight: bold;
+        }
+        .company p{
+            margin-top: 20px;
+            font-size: small;
+            margin-left: 140px;
+            font-weight: bold;
+        }
+        .wrap{
+            margin-top: 80px;
+            box-sizing: border-box;
+            border-radius: 20px;
+            background-color: rgb(252, 250, 250);
+            margin-left: 100px;
+            margin-right: 100px;
+            padding-top: 0.4px;
+            margin-bottom: 80px;
+        }
+        #btn{
+            box-sizing: border-box;
+            background-color: #800000;
+            color: white;
+            border-radius: 50px;
+            width: 10%;
+            margin-bottom: 90px;
+            margin-top: 40px;
+            margin-left: 650px;
+            font-size: small;
+            padding: 10px;
+        }
+        #btn:hover{
+            box-sizing: border-box;
+            background-color: #fff;
+            color: black;
+            border-radius: 50px;
+            width: 10%;
+            margin-bottom: 90px;
+            margin-top: 40px;
+            margin-left: 650px;
+            font-size: small;
+        }
+        .company {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-pair {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .info-pair label {
+            width: 270px;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+            font-weight: bold;
+            font-size: 20px; 
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .info-pair p {
+            text-align: justify;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-weight: lighter;
+            margin-left: 30px;
+            color: #555; 
+            box-sizing: border-box;
+            background-color: rgb(218, 215, 215);
+            color: #000;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            margin-left: 50px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        #time-input-container {
+            display: flex;
+            align-items: center;
+            margin-left: -25px;
+        }
+        #time-input-container input[type="time"] {
+            margin-right: -40px; 
+            padding: 10px;
+        }
+        #time-input-container p {
+            margin-right: 10px;
+        }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+        <div class="navdiv">
+            <div class="logo" style="width: 134.5rem;">
+                <a href="index.html"><img src="assets/img/TARUMT.png" alt="" class="img-fluid"></a>
+            </div>
+            <ul class="ml-auto">    
+                <li><a href="student.html" >Home</a></li>
+                <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </nav>
+
+<div class="wrap">
+    <div class="upload">
+        <img id="preview" src="assets/img/noprofil.jpg" width="100" height="100" alt="">
+      </div>
+
+    <div class="greetings">
+        <p><strong>Giordano Sdn Bhd</strong></p>
+    </div>
+
+    <div class="container">
+        <h4>Senior Manager - DAT Process Assurance, IT Audit</h4> <!-- Job Title -->
+        <p>PwC Malaysia · Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia</p> <!-- address -->
+        <h5 class="mb-2">Contact Company</h5>
+        <div class="company">
+            <div class="info-pair">
+                <label for="person-in-charge">Person In-Charge</label>
+                <p>Irene Lau</p>
+            </div>
+            <div class="info-pair">
+                <label for="hr_email">HR Email</label>
+                <p>irene123@gmail.com</p>
+            </div>
+            <div class="info-pair">
+                <label for="hr_contact">HR Contact</label>
+                <p>011-10293345</p>
+            </div>
+        </div>
+            
+        <h5 class="mb-2">About The Job</h5>
+        <div class="company">
+            <div class="info-pair">
+                <label for="job_position">Job Position</label>
+                <p>Intern</p>
+            </div>
+            <div class="info-pair">
+                <label for="description">Job Description</label>
+                <p>Information Technology General Controls (ITGC), ITGC, IT General Controls (ITGC)</p>
+            </div>
+            <div class="info-pair">
+                <label for="education_level">Education Level</label>
+                <p>Degree</p>
+            </div>
+            <div class="info-pair">
+                <label for="accomodation">Accomodation</label>
+                <p>Yes</p>
+            </div>
+            <div class="info-pair">
+                <label for="transport">Transport</label>
+                <p>Yes</p>
+            </div>
+            <div class="info-pair">
+                <label for="laptop">Laptop</label>
+                <p>Yes</p>
+            </div>
+            <div class="info-pair">
+                <label for="work_time">Work Time</label>
+                <div id="time-input-container" class="label-input-container">
+                    <input type="time" id="appt_start" name="appt_start">
+                    <p i="app">to</p>
+                    <input type="time" id="appt_end" name="appt_end">
+                </div>
+            </div>
+            <div class="info-pair">
+                <label for="work_hours">Work Hours</label>
+                <p>8 hours</p>
+            </div>
+            <div class="info-pair">
+                <label for="work_environment">Work Environment</label>
+                <p>On-site</p>
+            </div>
+            <div class="info-pair">
+                <label for="allowance">Monthly Allowance</label>
+                <p>800</p>
+            </div>
+        </div>
+    </div>
+    <button id="btn">Apply</button>
+</div>
+    
+  </body>
+</html>
