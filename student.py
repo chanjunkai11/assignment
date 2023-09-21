@@ -243,8 +243,8 @@ def studJob():
             s3_object_url = "/assets/img/noprofil.jpg"
     return render_template('studentView.html', card_data=user_data_list, student_name=user_data2[0], stud_pfp=s3_object_url)
 
-@student_bp.route("/jobProfile/<jobid>", methods=['GET', 'POST'])
-def browseJob(jobid):
+@student_bp.route("/jobProfile/<job_id>", methods=['GET', 'POST'])
+def browseJob(job_id):
     cursor = db_conn.cursor()
     select_sql = "SELECT company.person_incharge, company.hr_contact, company.email, company.company_name, company.address from job_portal INNER JOIN company ON job_portal.company_id = company.company_id WHERE job_portal.job_id = %s"
     cursor.execute(select_sql, (job_id))
