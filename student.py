@@ -323,7 +323,8 @@ def applyJobdashboard():
                     company.hr_contact, 
                     applied_job.applied_id
                     FROM applied_job
-                    INNER JOIN company ON applied_job.company_id = company.company_id
+                    INNER JOIN job_portal ON applied_job.job_id = job_portal.job_id
+                    INNER JOIN company ON job_portal.company_id = company.company_id
                     INNER JOIN student ON applied_job.stud_id = student.stud_id
                     WHERE applied_job.stud_id = %s
                   """
