@@ -137,6 +137,7 @@ def details():
     s3 = boto3.resource('s3')
     s3.Bucket(custombucket).put_object(Key=legal_file_name, Body=legal, ContentType="application/pdf")
     s3.Bucket(custombucket).put_object(Key=epf_file_name, Body=epf, ContentType="application/pdf")
+    s3.Bucket(custombucket).put_object(Key=pfp_file_name, Body=pfp, ContentType="img/png")
     return redirect(url_for('company.profile'))
 
 @company_bp.route("/jobsDetails", methods=['GET', 'POST'])
