@@ -260,6 +260,7 @@ def browseJob(jobid):
     accomodation_value = "Yes" if user_data2[3] else "No"
     transport_value = "Yes" if user_data2[4] else "No"
     laptop_value = "Yes" if user_data2[5] else "No"
+    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(user_data2[13]) + ".txt"
     user_data = {
         'education' : user_data2[2],
         'job_title' : user_data2[11],
@@ -278,7 +279,7 @@ def browseJob(jobid):
         'hr' : user_data1[1],
         'company_name' : user_data1[3],
         'company_address' : user_data1[4],
-        'describe' : 
+        'describe' : file_name
     }
     file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(user_data2[13]) + ".txt"
     return render_template('companyJobDetailUpdate.html', **user_data, job_txt=file_name)
