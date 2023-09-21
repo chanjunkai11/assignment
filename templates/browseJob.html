@@ -268,8 +268,10 @@
             </div>
         </div>
     </div>
-    <input type="text" name="" id="hidden_id" value="{{job_id}}" style="display: none;">
-    <button id="btn">Apply</button>
+    {% if not applied %}
+      <input type="text" name="" id="hidden_id" value="{{job_id}}" style="display: none;">
+      <button id="btn">Apply</button>
+    {% endif %}
 </div>
     
     <script>
