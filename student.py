@@ -207,7 +207,7 @@ def studJob():
     
     user_data_list = []
     for row in user_data:
-        company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + row[1] + "_img.png"
+        company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + row[1] + "_pfp_img.png"
         user_data_dict = {
             "company_name": row[0],
             "job_title": row[2],
