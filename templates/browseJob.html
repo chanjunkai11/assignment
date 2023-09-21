@@ -282,10 +282,20 @@
             success: function (response) {
                 if (response.success) {
                     // Success message
-                    swal("Success!", "Application successful", "success");
+                    Swal.fire({
+                      icon: 'success', // Specify the error icon
+                      title: 'Application Successful.', // Title of the alert
+                      confirmButtonText: 'OK', 
+                      allowOutsideClick: false
+                  });
                 } else {
                     // Failure message
-                    swal("Error!", "You have already applied for this job.", "error");
+                    Swal.fire({
+                      icon: 'error', // Specify the error icon
+                      title: 'You have already applied for this job.', // Title of the alert
+                      confirmButtonText: 'OK',
+                      allowOutsideClick: false
+                  });
                 }
             },
             error: function (error) {
