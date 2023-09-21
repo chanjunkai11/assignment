@@ -204,7 +204,7 @@ def registerAcc():
 
 @student_bp.route("/jobBrowsing", methods=['GET', 'POST'])
 def studJob():
-    select_sql = "SELECT company.company_name, company.company_id, job_portal.job_title, job_portal.job_id FROM job_portal INNER JOIN company ON job_portal.company_id = company.id"
+    select_sql = "SELECT company.company_name, company.company_id, job_portal.job_title, job_portal.job_id FROM job_portal INNER JOIN company ON job_portal.company_id = company.company_id"
     cursor = db_conn.cursor()
     cursor.execute(select_sql)
     user_data = cursor.fetchall()
