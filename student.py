@@ -279,6 +279,10 @@ def browseJob(job_id):
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":
             company_img = "/assets/img/noprofil.jpg"
+    if user_data[0] > 0:
+        applied = True
+    else:
+        applied = False
     user_data = {
         'education' : user_data2[2],
         'job_title' : user_data2[11],
@@ -298,10 +302,9 @@ def browseJob(job_id):
         'company_name' : user_data1[3],
         'company_address' : user_data1[4],
         'describe' : file_name,
-        'company_pic' : company_img
-    }
-    if user_data[0] > 0:
-        return render_template('browseJobView.html', **user_data)
+        'company_pic' : company_img,
+        'applied' : applied
+    }   
     return render_template('browseJob.html', **user_data)
 
 @student_bp.route("/applyJob", methods=['POST'])
