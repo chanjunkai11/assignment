@@ -221,7 +221,7 @@ def studJob():
     cursor.execute(select_sql, (session["user_id"]))
     user_data2 = cursor.fetchone()
     cursor.close()
-
+    s3 = boto3.resource('s3')
     user_data_list = []
     for row in user_data:
         company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + row[1] + "_pfp_img.png"
@@ -238,10 +238,9 @@ def studJob():
             "company_img" : company_img
         }
         user_data_list.append(user_data_dict)
-    s3 = boto3.resource('s3')
     key = "stud-id-" + str(session["user_id"]) + "_pfp.png"
     s3_object_url = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + str(session["user_id"]) + "_pfp.png"
-    s3 = boto3.resource('s3')
+    
     try:
         s3.Object(bucket, key).load()
     except botocore.exceptions.ClientError as e:
@@ -269,6 +268,7 @@ def browseJob(job_id):
     file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(user_data2[13]) + ".txt"
     company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_pfp_img.png"
     key = "com-id-" + str(user_data2[1]) + "_pfp_img.png"
+    s3 = boto3.resource('s3')
     try:
         s3.Object(bucket, key).load()
     except botocore.exceptions.ClientError as e:
