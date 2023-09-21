@@ -296,17 +296,10 @@
                 job_id: id
             },
             success: function (response) {
-                // Assuming that the response contains a flag indicating success
                 if (response.success) {
-                    // Find the row by ID and remove it
-                    var row = document.getElementById("row_" + id);
-                    if (row) {
-                        row.remove();
-                        table.draw(); // Redraw the DataTable
-                    }
-                } else {
-                    console.error("Delete operation failed.");
-                }
+                    var rowIndex = table.row($('#row_' + id)).index();
+                    table.fnDeleteRow(rowIndex);
+                } 
             },
             error: function (error) {
                 console.error(error);
