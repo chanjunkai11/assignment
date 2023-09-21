@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs Applied</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style> 
+        .nav-link {
+        font-weight: bold;
+        }
+        .navbar {
+            background: whitesmoke;
+            font-family: Arial, Helvetica, sans-serif;
+            padding-right: 15px;
+            padding-left: 15px;
+            top: 0;
+            left: 0;
+        }
+        .navdiv{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo img{
+            width: 20rem;
+            top:0;
+            left: 220px;
+            margin-right: -200px;
+        }
+        li {
+            list-style: none;
+            display: inline-block;
+        }
+        li a{
+            color:black;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+            padding-right: 187x;
+        }
+        .table-container {
+            margin-left: 130px;
+            margin-right: 130px;
+        }
+        .greetings h4 {
+                font-family: Trebuchet MS, sans-serif;
+                text-align: left;
+                font-weight: bold;
+                font-style: normal;
+                margin-top: 50px;
+                margin-left: 60px;
+                padding-bottom: 3px;
+        }
+        #example_paginate .paginate_button.next a {
+                background-color: #800000 !important;
+                color: white !important;
+        }
+
+       #example_paginate .paginate_button.previous a {
+                background-color: #800000 !important; /* Use the original color of the Previous button */
+                color: white !important;
+        }
+
+       .page-item.active .page-link {
+                z-index: 3;
+                color: #fff;
+                background-color: #800000;
+                border-color: #800000;
+        }
+        #example_paginate .paginate_button.previous a,
+        #example_paginate .paginate_button.current a,
+        #example_paginate .paginate_button.next a {
+                 background-color: #800000 !important;
+                 color: white !important;
+                 border-color: #800000 !important;
+        }
+        h5 {
+            color: #fff;
+            margin-top: 30px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            text-decoration: underline;
+            background-color: #800000; 
+            padding: 8px; 
+            width: 15%;
+            text-align: center;
+            margin-left: 60px;
+        }    
+        #delete {
+            border-radius: 30px;
+            width: 75%;
+            background-color: white;
+            color: black;
+        }
+        #delete:hover {
+            background-color: #800000;
+            color: white;
+            opacity: 0.95;
+        } 
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+        <div class="navdiv">
+            <div class="logo" style="width: 134.5rem;">
+                <a href="index.html"><img src="assets/img/TARUMT.png" alt="" class="img-fluid"></a>
+            </div>
+            <ul class="ml-auto"> <!-- Use ml-auto to push the list to the right -->
+                <li><a href="student.html">Home</a></li>
+                <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="greetings">
+        <h4>Welcome, Agatha Lau</h4>
+        <h5 class="mb-2">Job Applied List</h5>
+    </div>
+    <div class="table-container py-5">
+        <div class="row">
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Job Ttile</th>
+                        <th>Position</th>
+                        <th>Person In-charge</th>
+                        <th>HR email</th>
+                        <th>HR Contact</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Agatha</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011-04-25</td>
+                        <td>$320,800</td>
+                        <td><button type="button" id="delete">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Garrett Winters</td>
+                        <td>Accountant</td>
+                        <td>Tokyo</td>
+                        <td>63</td>
+                        <td>2011-07-25</td>
+                        <td>$170,750</td>
+                        <td><button type="button" id="delete">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Ashton Cox</td>
+                        <td>Junior Technical Author</td>
+                        <td>San Francisco</td>
+                        <td>66</td>
+                        <td>2009-01-12</td>
+                        <td>$86,000</td>
+                        <td><button type="button" id="delete">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        new DataTable('#example');
+    </script>
+
+
+  </body>
+</html>
