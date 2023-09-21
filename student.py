@@ -260,8 +260,8 @@ def browseJob(job_id):
     user_data2 = cursor.fetchone()
 
     select_sql = "SELECT COUNT(*) FROM applied_job WHERE stud_id = %s AND job_id = %s"
-    cursor.execute(select_sql, (session['user_id'], id))
-    user_data = cursor.fetchone()
+    cursor.execute(select_sql, (session['user_id'], job_id))
+    checking = cursor.fetchone()
     
     cursor.close()
     hours = int(user_data2[8])
@@ -279,7 +279,7 @@ def browseJob(job_id):
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":
             company_img = "/assets/img/noprofil.jpg"
-    if user_data[0] > 0:
+    if checking[0] > 0:
         applied = True
     else:
         applied = False
