@@ -109,6 +109,7 @@ def profile():
         key = "stud-id-" + user_data1[0] + "_pfp.png"
         resume_link = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + user_data1[0] + "_resume_file.pdf"
         com_link = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + user_data1[0] + "_form_file.pdf"
+        s3 = boto3.resource('s3')
         try:
             s3.Object(bucket, key).load()
         except botocore.exceptions.ClientError as e:
