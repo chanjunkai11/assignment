@@ -282,5 +282,14 @@ def browseJob(job_id):
         'describe' : file_name
     }
     file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(user_data2[13]) + ".txt"
-    return render_template('companyJobDetailUpdate.html', **user_data, job_txt=file_name)
-    return render_template('browseJob.html')
+    return render_template('browseJob.html', **user_data)
+
+def format_timedelta(td):
+    # Extract hours, minutes, and seconds components
+    hours, remainder = divmod(td.seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+
+    # Format as HH:MM:SS with leading zeros
+    formatted_time = f"{hours:02}:{minutes:02}:{seconds:02}"
+
+    return formatted_time
