@@ -295,7 +295,7 @@ def browseJob(job_id):
         'describe' : file_name,
         'company_pic' : company_img
     }
-    return render_template('browseJob.html', **user_data)
+    return render_template('browseJobView.html', **user_data)
 
 @student_bp.route("/applyJob", methods=['POST'])
 def applyJob():
