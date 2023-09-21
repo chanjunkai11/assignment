@@ -233,11 +233,12 @@ def studJob():
         }
         user_data_list.append(user_data_dict)
     s3 = boto3.resource('s3')
+    key = "stud-id-" + str(session["user_id"]) + "_pfp.png"
     s3_object_url = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + str(session["user_id"]) + "_pfp.png"
+    s3 = boto3.resource('s3')
     try:
-        response = requests.get(s3_object_url)
-        if response.status_code == 404:
-            s3_object_url = '/assets/img/noprofil.jpg'
-    except requests.exceptions.RequestException as e:
-        print("")
+        s3.Object(bucket, key).load()
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == "404":
+            s3_object_url = "/assets/img/noprofil.jpg"
     return render_template('studentView.html', card_data=user_data_list, student_name=user_data2[0], stud_pfp=s3_object_url)
