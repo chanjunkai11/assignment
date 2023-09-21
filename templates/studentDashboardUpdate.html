@@ -288,13 +288,7 @@
                 <div class="card">
                     <div class="label-input-container">
                         <label for="company_name">Company Name:</label>
-                        <input type="text" id="company_email_hidden" value="{{ company_name }}" style="display: none;">
-                        <select id="company_name" name="company_name" class="input" onchange="selectCompanyData()" required>
-                            <option disabled selected value="">Select a Comapny</option>
-                            {% for company in companies %}
-                                <option value="{{ company }}">{{ company }}</option>
-                            {% endfor %}
-                        </select>
+                        <input type="text" id="company_email" value="{{ company_name }}" readonly>
                     </div>
                     <div class="label-input-container">
                         <label for="company_email">Company Email:</label>
@@ -306,14 +300,10 @@
                     </div>
                     <section class="upload">
                         <label for="Resume">Resume:</label>
-                        <input type="file" id="real-file" name="resume" hidden="hidden" />
-                        <button type="button" id="custom-button">CHOOSE A FILE</button>
-                        <span id="custom-text">{{ txt_msg }}</span>
+                        <a href="{{ resume_pdf }}" target="_blank"><span id="custom-text">Resume.pdf</span></a>
                         <br>
                         <label for="Com. Acceptance Form">Com. Acceptance Form:</label>
-                        <input type="file" id="real-file2" name="form" hidden="hidden" />
-                        <button type="button" id="custom-button2">CHOOSE A FILE</button>
-                        <span id="custom-text2">{{ txt_msg2 }}</span>
+                        <a href="{{ company_pdf }}" target="_blank"><span id="custom-text2">Acceptance_Form.pdf</span></a>
                         <br><br>
                     </section>
                 </div>
@@ -325,135 +315,5 @@
    </div> 
    <br><br><br>
 </form>
-    <script>
-    var hiddenInput = document.getElementById('supervisor_name_hidden');
-    var selectElement = document.getElementById('supervisor_name');
-    var selectedValue = hiddenInput.value;
-
-    // Loop through the select options
-    for (var i = 0; i < selectElement.options.length; i++) {
-        if (selectElement.options[i].value == selectedValue) {
-            selectElement.selectedIndex = i;
-            break;
-        }
-    }
-</script>
-    <script>
-        const realFileBtn = document.getElementById("real-file");
-        const customBtn = document.getElementById("custom-button");
-        const customTxt = document.getElementById("custom-text");
-
-        customBtn.addEventListener("click", function() {
-        realFileBtn.click();
-        });
-
-        realFileBtn.addEventListener("change", function() {
-        const file = realFileBtn.files[0];
-        if (file) {
-            const fileName = file.name;
-            const fileExtension = fileName.split('.').pop().toLowerCase();
-
-            // Check if the selected file has a PDF extension
-            if (fileExtension === "pdf") {
-                customTxt.innerHTML = `<a href="${URL.createObjectURL(file)}" target="_blank">${fileName}</a>`;
-            } else {
-                customTxt.innerHTML = "Invalid file format. Please select a PDF file.";
-                realFileBtn.value = ""; // Clear the input field
-            }
-        } 
-    });
-
-        const realFileBtn2 = document.getElementById("real-file2");
-        const customBtn2 = document.getElementById("custom-button2");
-        const customTxt2 = document.getElementById("custom-text2");
-
-        customBtn2.addEventListener("click", function() {
-        realFileBtn2.click();
-        });
-
-        realFileBtn2.addEventListener("change", function() {
-        const file = realFileBtn2.files[0];
-        if (file) {
-            const fileName = file.name;
-            const fileExtension = fileName.split('.').pop().toLowerCase();
-
-            // Check if the selected file has a PDF extension
-            if (fileExtension === "pdf") {
-                customTxt2.innerHTML = `<a href="${URL.createObjectURL(file)}" target="_blank">${fileName}</a>`;
-            } else {
-                customTxt2.innerHTML = "Invalid file format. Please select a PDF file.";
-                realFileBtn2.value = ""; // Clear the input field
-            }
-        } 
-    });
-
-    const submitBtn = document.getElementById("btn");
-    const errorMessage = document.getElementById("error-message");
-
-    submitBtn.addEventListener("click", function(e) {
-        const file1 = document.getElementById("real-file").files[0];
-        const file2 = document.getElementById("real-file2").files[0];
-
-        if (!file1 || !file2) {
-            Swal.fire({
-            icon: 'error', // Specify the error icon
-            title: 'Both files are required.', // Title of the alert
-            confirmButtonText: 'OK' // Text for the confirmation button
-        });
-            e.preventDefault(); // Prevent form submission
-        } 
-    });
-   </script>
-    <script>
-        function selectSupervisorEmail() {
-            // Get the selected lecturer's name
-            var selectedLecturer = document.getElementById('supervisor_name').value;
-
-            // Make an AJAX request to the Flask backend to fetch the email
-            fetch('/student/get_lecturer_email?lecturer=' + selectedLecturer)
-                .then(response => response.json())
-                .then(data => {
-                    // Populate the email field with the fetched email
-                    document.getElementById('supervisor_email').value = data.email;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-    </script>
-    <script>
-        function selectCompanyData() {
-            // Get the selected lecturer's name
-            var selectedCompany = document.getElementById('company_name').value;
-
-            // Make an AJAX request to the Flask backend to fetch the email
-            fetch('/student/get_company?company=' + selectedCompany)
-                .then(response => response.json())
-                .then(data => {
-                    // Populate the email field with the fetched email
-                    document.getElementById('company_email').value = data.email;
-                    document.getElementById('company_address').value = data.address;
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-    </script>
-    <script>
-    // Get the hidden input element
-    var hiddenInput = document.getElementById('company_name_hidden');
-    var selectElement = document.getElementById('company_name');
-    var selectedValue = hiddenInput.value;
-
-    // Loop through the select options
-    for (var i = 0; i < selectElement.options.length; i++) {
-        // Check if the value of the current option matches the selected value
-        if (selectElement.options[i].value === selectedValue) {
-            // Set the current option as the default selected option
-            selectElement.selectedIndex = i;
-            break; // Exit the loop once the match is found
-        }
-    }
-</script>
 </body>
 </html>
