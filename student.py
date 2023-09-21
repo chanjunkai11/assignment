@@ -293,7 +293,7 @@ def browseJob(job_id):
         'company_name' : user_data1[3],
         'company_address' : user_data1[4],
         'describe' : file_name,
-        'company_img' : company_img
+        'company_pic' : company_img
     }
     return render_template('browseJob.html', **user_data)
 
