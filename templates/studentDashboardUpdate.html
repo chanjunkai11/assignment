@@ -7,13 +7,6 @@
     <!-- Your custom CSS styles -->
     <style media="screen">
         /* Your existing custom CSS styles */
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: whitesmoke;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
         .container {
             width: 100%;
             max-width: 800px; /* Adjust as needed */
@@ -113,8 +106,8 @@
         }
 
         #custom-button:hover {
-            background-color: white;
-            color: #000;
+            background-color: #800000;
+            opacity: 0.6;
         }
 
         #custom-text {
@@ -135,8 +128,8 @@
         }
 
         #custom-button2:hover {
-            background-color: white;
-            color: #000;
+            background-color: #800000;
+            opacity: 0.6;
         }
 
         #custom-text2 {
@@ -157,17 +150,11 @@
             width: 280px;
         }
         .submit #btn:hover{
-            background: white;
-            color: black;
+            background-color: #800000;
+            opacity: 0.6;
         }
         .nav-link {
         font-weight: bold;
-        }
-        .logo img {
-            width: 12rem;
-            top: 10px;
-            left: 110px;
-            bottom: 240px;
         }
         .navbar {
             background: whitesmoke;
@@ -182,6 +169,12 @@
             align-items: center;
             justify-content: space-between;
         }
+        .logo img{
+            width: 20rem;
+            top:0;
+            left: 220px;
+            margin-right: -200px;
+        }
         li {
             list-style: none;
             display: inline-block;
@@ -192,9 +185,38 @@
             font-weight: bold;
             margin-right: 25px;
         }
-        .logo img{
-            width: 20rem;
-            top:0;
+        .upload_image{
+        width: 100px;
+        position: relative;
+        margin-top: 50px;
+        margin-left: 340px;
+        }
+        .upload_image img{
+        border-radius: 50%;
+        border: 6px solid #eaeaea;
+        }
+
+        .upload_image .round{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #00B4FF;
+        width: 32px;
+        height: 32px;
+        line-height: 33px;
+        text-align: center;
+        border-radius: 50%;
+        overflow: hidden;
+        }
+
+        .upload_image .round input[type = "file"]{
+        position: absolute;
+        transform: scale(2);
+        opacity: 0;
+        }
+
+        input[type=file]::-webkit-file-upload-button{
+            cursor: pointer;
         }
     </style>
 </head>
@@ -202,7 +224,7 @@
     <nav class="navbar">
         <div class="navdiv">
             <div class="logo" style="width: 134.5rem;">
-                <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>
+                <a href="/"><img src="{{ pfp }}" alt="" class="img-fluid"></a>
             </div>
             <ul class="ml-auto"> <!-- Use ml-auto to push the list to the right -->
                 <li><a href="/student">Home</a></li>
@@ -215,6 +237,12 @@
 <form action="/student/profile" method = "POST" enctype="multipart/form-data">
     <div class="container">
         <div class="greetings">
+            <div class="upload_image">
+                <img id="preview" src="assets/img/noprofil.jpg" width="100" height="100" alt="">
+                <div class="round">
+                  <input type="file" id="imageInput" accept="image/*">
+                  <i class="fa fa-camera" style="color: #fff;"></i>
+            </div>
             <h4>Welcome: {{ name }}</h4>
         </div>
 
@@ -265,13 +293,7 @@
                 <div class="card">
                     <div class="label-input-container">
                         <label for="supervisor_name">UC Supervisor Name:</label>
-                        <input type="text" id="supervisor_name_hidden" value="{{ supervisor_name }}" style="display: none;">
-                        <select id="supervisor_name" name="supervisor_name" class="input" onchange="selectSupervisorEmail()" required>
-                            <option disabled selected value="">Select a Supervisor</option>
-                            {% for lecturer in lecturers %}
-                                <option value="{{ lecturer }}">{{ lecturer }}</option>
-                            {% endfor %}
-                        </select>
+                        <input type="text" id="supervisor_email" value="{{ supervisor_name }}" readonly>
                     </div>
                     <div class="label-input-container">
                         <label for="supervisor_email">UC Supervisor Email:</label>
