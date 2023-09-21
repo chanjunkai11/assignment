@@ -271,10 +271,7 @@
 </div>
     <script>
         document.getElementById('btn').addEventListener('click', function () {
-    // Get the value of the hidden input
         var hiddenId = document.getElementById('hidden_id').value;
-    
-        // Send a POST request to the backend endpoint
         $.ajax({
             type: "POST",
             url: "/student/applyJob",
@@ -282,11 +279,12 @@
                 job_id: hiddenId
             },
             success: function (response) {
-                // Assuming that the response contains a flag indicating success
                 if (response.success) {
-                    // Handle the success case here
+                    // Success message
+                    swal("Success!", "Application successful", "success");
                 } else {
-                    console.error("Delete operation failed.");
+                    // Failure message
+                    swal("Error!", "You have already applied for this job.", "error");
                 }
             },
             error: function (error) {
