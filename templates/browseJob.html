@@ -266,8 +266,36 @@
             </div>
         </div>
     </div>
+    <input type="text" name="" id="hidden_id" value="{{job_id}}" style="display: none;">
     <button id="btn">Apply</button>
 </div>
-    
+    <script>
+        document.getElementById('btn').addEventListener('click', function () {
+      // Get the value of the hidden input
+      var hiddenId = document.getElementById('hidden_id').value;
+  
+      // Create the data object to send to the backend
+      var data = {
+          job_id: hiddenId
+          // Add more data if needed
+      };
+  
+      // Send a POST request to the backend endpoint
+      fetch('/your-backend-endpoint', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json' // Set the content type as JSON
+          },
+          body: JSON.stringify(data) 
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log(data); 
+      })
+      .catch(error => {
+          console.error('Error:', error);
+      });
+  });
+    </script>
   </body>
 </html>
