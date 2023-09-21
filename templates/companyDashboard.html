@@ -280,10 +280,14 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <script>
-        new DataTable('#example');
-    </script>
-      <script>
+   <script>
+    var table; // Declare a global variable to store the DataTable instance
+
+    // Initialize DataTable when the document is ready
+    $(document).ready(function () {
+        table = new DataTable('#example');
+    });
+
     function delete_row(id) {
         $.ajax({
             type: "POST",
@@ -298,10 +302,8 @@
                     var row = document.getElementById("row_" + id);
                     if (row) {
                         row.remove();
+                        table.draw(); // Redraw the DataTable
                     }
-                    
-                    // Update the entry count
-                    updateEntryCount();
                 } else {
                     console.error("Delete operation failed.");
                 }
@@ -310,21 +312,6 @@
                 console.error(error);
             }
         });
-    }
-
-    function updateEntryCount() {
-        // Get page information from the DataTable instance
-        var pageInfo = table.page.info();
-
-        // Update the entry count directly in the existing element
-        var entryCountElement = $('#example_info');
-        var entryCountText = 'Showing ' + (pageInfo.start + 1) + ' to ' + pageInfo.end + ' of ' + pageInfo.recordsDisplay + ' entries';
-        entryCountElement.text(entryCountText);
-
-        // If there are no records, display a message
-        if (pageInfo.recordsDisplay === 0) {
-            entryCountElement.text('No records found.');
-        }
     }
 </script>
   </body>
