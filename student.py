@@ -225,6 +225,12 @@ def studJob():
     user_data_list = []
     for row in user_data:
         company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + row[1] + "_pfp_img.png"
+        key = "com-id-" + str(row[1]) + "_pfp_img.png"
+        try:
+            s3.Object(bucket, key).load()
+        except botocore.exceptions.ClientError as e:
+            if e.response['Error']['Code'] == "404":
+                company_img = "/assets/img/noprofil.jpg"
         user_data_dict = {
             "company_name": row[0],
             "job_title": row[2],
@@ -261,6 +267,13 @@ def browseJob(job_id):
     transport_value = "Yes" if user_data2[4] else "No"
     laptop_value = "Yes" if user_data2[5] else "No"
     file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(user_data2[13]) + ".txt"
+    company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_pfp_img.png"
+    key = "com-id-" + str(user_data2[1]) + "_pfp_img.png"
+    try:
+        s3.Object(bucket, key).load()
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == "404":
+            company_img = "/assets/img/noprofil.jpg"
     user_data = {
         'education' : user_data2[2],
         'job_title' : user_data2[11],
@@ -279,9 +292,9 @@ def browseJob(job_id):
         'hr' : user_data1[1],
         'company_name' : user_data1[3],
         'company_address' : user_data1[4],
-        'describe' : file_name
+        'describe' : file_name,
+        'company_img' : company_img
     }
-    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(user_data2[13]) + ".txt"
     return render_template('browseJob.html', **user_data)
 
 def format_timedelta(td):
