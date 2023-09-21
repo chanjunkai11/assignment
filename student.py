@@ -322,7 +322,8 @@ def applyJobdashboard():
                     company.person_incharge, 
                     company.email, 
                     company.hr_contact, 
-                    applied_job.applied_id
+                    applied_job.applied_id,
+                    applied_job.job_id
                     FROM applied_job
                     INNER JOIN job_portal ON applied_job.job_id = job_portal.job_id
                     INNER JOIN company ON job_portal.company_id = company.company_id
@@ -341,7 +342,8 @@ def applyJobdashboard():
             "position": row[2],
             "pic": row[3],
             "email": row[4],
-            "contact": row[5]
+            "contact": row[5],
+            "job_id" : row[7]
         }
         user_data_list.append(user_data_dict)
     select_sql = "SELECT CONCAT(first_name, ' ', last_name) FROM student WHERE stud_id = %s"
@@ -349,6 +351,8 @@ def applyJobdashboard():
     user_name = cursor.fetchone()
     cursor.close()
     return render_template('studentAppliedJobs.html', data_list=user_data_list, name=user_name[0])
+
+
     
 def format_timedelta(td):
     # Extract hours, minutes, and seconds components
