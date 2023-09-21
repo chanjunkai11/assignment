@@ -352,7 +352,7 @@ def applyJobdashboard():
     cursor.close()
     return render_template('studentAppliedJobs.html', data_list=user_data_list, name=user_name[0])
 
-@company_bp.route("/deleteJob", methods=['POST'])
+@student_bp.route("/deleteJob", methods=['POST'])
 def deleteJob():
     id = request.form['job_id']
     cursor = db_conn.cursor()
