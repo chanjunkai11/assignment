@@ -242,3 +242,8 @@ def studJob():
         if e.response['Error']['Code'] == "404":
             s3_object_url = "/assets/img/noprofil.jpg"
     return render_template('studentView.html', card_data=user_data_list, student_name=user_data2[0], stud_pfp=s3_object_url)
+
+@student_bp.route("/jobProfile", methods=['GET', 'POST'])
+def browseJob():
+    
+    return render_template('browseJob.html')
