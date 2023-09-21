@@ -299,6 +299,9 @@
                     if (row) {
                         row.remove();
                     }
+                    
+                    // Update the entry count
+                    updateEntryCount();
                 } else {
                     console.error("Delete operation failed.");
                 }
@@ -308,6 +311,29 @@
             }
         });
     }
+
+    function updateEntryCount() {
+        // Get the DataTable instance
+        var table = new DataTable('#example');
+
+        // Get page information
+        var pageInfo = table.page.info();
+
+        // Update the entry count directly in the existing element
+        var entryCountElement = $('#entriesInfo');
+        var entryCountText = 'Showing ' + (pageInfo.start + 1) + ' to ' + pageInfo.end + ' of ' + pageInfo.recordsDisplay + ' entries';
+        entryCountElement.text(entryCountText);
+
+        // If there are no records, display a message
+        if (pageInfo.recordsDisplay === 0) {
+            entryCountElement.text('No records found.');
+        }
+    }
+
+    // Call updateEntryCount when the page loads
+    $(document).ready(function () {
+        updateEntryCount();
+    });
 </script>
   </body>
 </html>
