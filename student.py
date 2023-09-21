@@ -63,10 +63,6 @@ def logout():
 @login_required
 def profile():
     username = session["user_id"]
-    try:
-        updating = request.form['update']
-    except BadRequest:
-        updating = None
 
     cursor = db_conn.cursor()
     query = "SELECT * FROM student WHERE stud_id = %s"
@@ -84,7 +80,7 @@ def profile():
         'address' : user_data1[3]
     }
 
-    if user_data1[9] and updating is None:
+    if user_data1[9]:
         query = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, email FROM lecturer WHERE lec_id = %s"
         cursor.execute(query, (user_data1[7],))
         user_data2 = cursor.fetchone()
