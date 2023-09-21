@@ -347,7 +347,7 @@ def applyJobdashboard():
     cursor.execute(select_sql, (session['user_id']))
     user_name = cursor.fetchone()
     cursor.close()
-    return render_template('studentAppliedJobs.html', data_list=user_data_list, name=user_name)
+    return render_template('studentAppliedJobs.html', data_list=user_data_list, name=user_name[0])
     
 def format_timedelta(td):
     # Extract hours, minutes, and seconds components
