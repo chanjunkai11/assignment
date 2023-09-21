@@ -153,37 +153,44 @@
             background-color: #800000;
             opacity: 0.6;
         }
-        .nav-link {
-        font-weight: bold;
-        }
         .navbar {
-            background: whitesmoke;
-            font-family: Arial, Helvetica, sans-serif;
-            padding-right: 15px;
-            padding-left: 15px;
-            top: 0;
-            left: 0;
-        }
-        .navdiv{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+                background: whitesmoke;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 15px;
+                top: 0;
+                left: 0;
+            }
         .logo img{
             width: 20rem;
             top:0;
             left: 220px;
             margin-right: -200px;
         }
-        li {
-            list-style: none;
-            display: inline-block;
+        ul {
+        list-style-type: none;
+        margin: 0;
+        padding-bottom: 3px;
+        padding-left: 20px;
+        overflow: hidden;
+        background-color: whitesmoke;
         }
-        li a{
-            color:black;
-            font-size: 18px;
-            font-weight: bold;
-            margin-right: 25px;
+
+        li {
+        float: right;
+        }
+
+        li a {
+        display: block;
+        color: black;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: small;
+        }
+        li a:hover:not(.active) {
+        background-color: #800000;
+        color: white;
+        text-decoration: none;
         }
         .upload_image{
         width: 100px;
@@ -224,12 +231,14 @@
     <nav class="navbar">
         <div class="navdiv">
             <div class="logo" style="width: 134.5rem;">
-                <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>
+                <ul>
+                    <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>\
+                    <li style="float:right"><a class="active" href="/student/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                    <li><a href="/student/jobBrowsing">Job Browsed</a></li>
+                    <li><a href="/student/applyJobDashboard">Job Applied</a></li>
+                    <li><a href="/student/profile">Profile</a></li>
+                  </ul>
             </div>
-            <ul class="ml-auto"> <!-- Use ml-auto to push the list to the right -->
-                <li><a href="/student/jobBrowsing">Home</a></li>
-                <li><a href="/student/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
-            </ul>
         </div>
     </nav>
     
