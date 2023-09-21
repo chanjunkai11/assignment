@@ -258,6 +258,11 @@ def browseJob(job_id):
     select_sql = "SELECT * from job_portal WHERE job_id = %s"
     cursor.execute(select_sql, (job_id))
     user_data2 = cursor.fetchone()
+
+    select_sql = "SELECT COUNT(*) FROM applied_job WHERE stud_id = %s AND job_id = %s"
+    cursor.execute(select_sql, (session['user_id'], id))
+    user_data = cursor.fetchone()
+    
     cursor.close()
     hours = int(user_data2[8])
     minutes = int((user_data2[8] - hours) * 60)
@@ -295,7 +300,9 @@ def browseJob(job_id):
         'describe' : file_name,
         'company_pic' : company_img
     }
-    return render_template('browseJobView.html', **user_data)
+    if user_data[0] > 0:
+        return render_template('browseJobView.html', **user_data)
+    return render_template('browseJob.html', **user_data)
 
 @student_bp.route("/applyJob", methods=['POST'])
 def applyJob():
