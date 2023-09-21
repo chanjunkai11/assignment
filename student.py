@@ -309,6 +309,7 @@ def applyJob():
         return jsonify({"success": False, "message": "You have already applied for this job."})
     insert_sql = "INSERT INTO applied_job (stud_id, job_id) VALUES (%s, %s)"
     cursor.execute(insert_sql, (session['user_id'], id))
+    db_conn.commit()
     cursor.close()
     return jsonify({"success": True, "message": "Successfully applied for this job."})
 
