@@ -352,7 +352,22 @@ def applyJobdashboard():
     cursor.close()
     return render_template('studentAppliedJobs.html', data_list=user_data_list, name=user_name[0])
 
-
+@company_bp.route("/deleteJob", methods=['POST'])
+def deleteJob():
+    id = request.form['job_id']
+    cursor = db_conn.cursor()
+    select_sql = "SELECT pointer, company_id from job_portal WHERE job_id = %s"
+    cursor.execute(select_sql, (id))
+    num = cursor.fetchone()
+    file_name = "com-id-" + str(num[1]) + "_job_desc_file" + str(num[0]) + ".txt"
+    s3 = boto3.resource('s3')
+    s3.Object(custombucket, file_name).delete()
+    delete_sql = "DELETE FROM job_portal WHERE job_id = %s"
+    cursor.execute(delete_sql, (id))
+    db_conn.commit()
+    cursor.close()
+    response = {'success': True, 'message': 'Job Deleted successfully'}
+    return jsonify(response)
     
 def format_timedelta(td):
     # Extract hours, minutes, and seconds components
