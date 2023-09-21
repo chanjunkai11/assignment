@@ -196,3 +196,8 @@ def registerAcc():
     cursor.close()
 
     return redirect(url_for('student.studhome'))
+
+@student_bp.route("/jobBrowsing", methods=['GET', 'POST'])
+def studJob():
+    
+    return render_template('studentView.html')
