@@ -110,16 +110,16 @@
     <nav class="navbar">
         <div class="navdiv">
             <div class="logo" style="width: 134.5rem;">
-                <a href="index.html"><img src="assets/img/TARUMT.png" alt="" class="img-fluid"></a>
+                <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>
             </div>
             <ul class="ml-auto"> <!-- Use ml-auto to push the list to the right -->
-                <li><a href="student.html">Home</a></li>
-                <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/student/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
             </ul>
         </div>
     </nav>
     <div class="greetings">
-        <h4>Welcome, Agatha Lau</h4>
+        <h4>Welcome, {{ name }}</h4>
         <h5 class="mb-2">Job Applied List</h5>
     </div>
     <div class="table-container py-5">
@@ -137,33 +137,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Agatha</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011-04-25</td>
-                        <td>$320,800</td>
-                        <td><button type="button" id="delete">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011-07-25</td>
-                        <td>$170,750</td>
-                        <td><button type="button" id="delete">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Ashton Cox</td>
-                        <td>Junior Technical Author</td>
-                        <td>San Francisco</td>
-                        <td>66</td>
-                        <td>2009-01-12</td>
-                        <td>$86,000</td>
-                        <td><button type="button" id="delete">Delete</button></td>
-                    </tr>
+                  {% for item in data_list %}
+                      <tr id="row_{{ item['id'] }}">
+                          <td><a href="/student/jobsDetails/{{item['id']}}">{{ item['company_name'] }}</a></td>
+                          <td>{{ item['job_title'] }}</td>
+                          <td>{{ item['position'] }}</td>
+                          <td>{{ item['pic'] }}</td>
+                          <td>{{ item['email'] }}</td>
+                          <td>{{ item['contact'] }}</td>
+                          <td><button type="button" id="delete" onclick="delete_row('{{item['id']}}')">Delete</button></td>
+                      </tr>
+                  {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -175,9 +159,35 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script>
-        new DataTable('#example');
-    </script>
+    var table; // Declare a global variable to store the DataTable instance
 
+    // Initialize DataTable when the document is ready
+    $(document).ready(function () {
+        table = new DataTable('#example');
+    });
 
+    function delete_row(id) {
+        $.ajax({
+            type: "POST",
+            url: "/student/deleteJob",
+            data: {
+                job_id: id
+            },
+            success: function (response) {
+                // Assuming that the response contains a flag indicating success
+                if (response.success) {
+                    // Find the row by ID and remove it
+                    var row = table.row($('#row_' + id));
+                    row.remove().draw(); // Remove and redraw the row
+                } else {
+                    console.error("Delete operation failed.");
+                }
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    }
+</script>
   </body>
 </html>
