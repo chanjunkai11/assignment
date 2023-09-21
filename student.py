@@ -224,12 +224,10 @@ def studJob():
         }
         user_data_list.append(user_data_dict)
     s3 = boto3.resource('s3')
-    s3_object_url = f'https://{s3_bucket_name}.s3.amazonaws.com/{s3_object_key}'
     s3_object_url = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + str(session["user_id"]) + "_pfp.png"
     try:
-        # Send a HEAD request to the S3 object URL
         s3.head_object(Bucket=s3_bucket_name, Key=s3_object_key)
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == '404':
             s3_object_url = '/assets/img/noprofil.jpg'
-    return render_template('studentView.html', card_data=user_data_list, student_name=user_data2[0], )
+    return render_template('studentView.html', card_data=user_data_list, student_name=user_data2[0], stud_pfp=s3_object_url)
