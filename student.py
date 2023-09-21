@@ -243,7 +243,43 @@ def studJob():
             s3_object_url = "/assets/img/noprofil.jpg"
     return render_template('studentView.html', card_data=user_data_list, student_name=user_data2[0], stud_pfp=s3_object_url)
 
-@student_bp.route("/jobProfile", methods=['GET', 'POST'])
-def browseJob():
+@student_bp.route("/jobProfile/<jobid>", methods=['GET', 'POST'])
+def browseJob(jobid):
+    cursor = db_conn.cursor()
+    select_sql = "SELECT company.person_incharge, company.hr_contact, company.email, company.company_name, company.address from job_portal INNER JOIN company ON job_portal.company_id = company.company_id WHERE job_portal.job_id = %s"
+    cursor.execute(select_sql, (job_id))
+    user_data1 = cursor.fetchone()
     
+    select_sql = "SELECT * from job_portal WHERE job_id = %s"
+    cursor.execute(select_sql, (job_id))
+    user_data2 = cursor.fetchone()
+    cursor.close()
+    hours = int(user_data2[8])
+    minutes = int((user_data2[8] - hours) * 60)
+    hours = f"{hours} hour(s) {minutes} minutes"
+    accomodation_value = "Yes" if user_data2[3] else "No"
+    transport_value = "Yes" if user_data2[4] else "No"
+    laptop_value = "Yes" if user_data2[5] else "No"
+    user_data = {
+        'education' : user_data2[2],
+        'job_title' : user_data2[11],
+        'position' : user_data2[12],
+        'accomodation' : accomodation_value,
+        'transport' : transport_value,
+        'laptop': laptop_value,
+        'start_time': format_timedelta(user_data2[6]),
+        'end_time' : format_timedelta(user_data2[7]),
+        'hours': hours,
+        'environment' : user_data2[9],
+        'allowance' : user_data2[10],
+        'job_id' : job_id,
+        'pic' : user_data1[0],
+        'email' : user_data1[2],
+        'hr' : user_data1[1],
+        'company_name' : user_data1[3],
+        'company_address' : user_data1[4],
+        'describe' : 
+    }
+    file_name = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data2[1]) + "_job_desc_file" + str(user_data2[13]) + ".txt"
+    return render_template('companyJobDetailUpdate.html', **user_data, job_txt=file_name)
     return render_template('browseJob.html')
