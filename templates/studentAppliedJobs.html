@@ -138,8 +138,8 @@
                 </thead>
                 <tbody>
                   {% for item in data_list %}
-                      <tr id="row_{{ item['job_id'] }}">
-                          <td><a href="/student/jobProfile/{{item['id']}}">{{ item['company_name'] }}</a></td>
+                      <tr id="row_{{ item['id'] }}">
+                          <td><a href="/student/jobProfile/{{item['job_id']}}">{{ item['company_name'] }}</a></td>
                           <td>{{ item['job_title'] }}</td>
                           <td>{{ item['position'] }}</td>
                           <td>{{ item['pic'] }}</td>
