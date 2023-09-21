@@ -297,6 +297,8 @@ def browseJob(job_id):
     }
     return render_template('browseJob.html', **user_data)
 
+@student_bp.route("/applyJob", methods=['POST'])
+
 def format_timedelta(td):
     # Extract hours, minutes, and seconds components
     hours, remainder = divmod(td.seconds, 3600)
