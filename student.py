@@ -104,9 +104,10 @@ def profile():
             "company_address" : user_data3[2],
         }
 
+        pfp = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + user_data1[0] + "_pfp.png"
         resume_link = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + user_data1[0] + "_resume_file.pdf"
         com_link = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + user_data1[0] + "_form_file.pdf"
-        return render_template('studentDashboardUpdate.html', **{**user_data, **user_data2, **user_data3}, name=name, resume_pdf=resume_link, company_pdf=com_link)
+        return render_template('studentDashboardUpdate.html', **{**user_data, **user_data2, **user_data3}, name=name, resume_pdf=resume_link, company_pdf=com_link, pfp=pfp)
     
     query = "SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM lecturer"
     cursor.execute(query)
