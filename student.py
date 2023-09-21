@@ -128,6 +128,7 @@ def details():
     companmy_name = request.form['company_name']
     resume = request.files['resume']
     com_form = request.files['form']
+    pfp = request.files['pfp']
 
     select_supervisor = "SELECT lec_id FROM lecturer WHERE CONCAT(first_name, ' ', last_name) = %s"
     select_company = "SELECT company_id FROM company WHERE company_name = %s"
@@ -145,9 +146,11 @@ def details():
     
     stud_resume_file_name = "stud-id-" + str(userid) + "_resume_file" + os.path.splitext(resume.filename)[1]
     stud_form_file_name = "stud-id-" + str(userid) + "_form_file" + os.path.splitext(com_form.filename)[1]
+    pfp_file_name = "stud-id-" + str(userid) + "_pfp" + os.path.splitext(pfp.filename)[1]
     s3 = boto3.resource('s3')
     s3.Bucket(custombucket).put_object(Key=stud_resume_file_name, Body=resume, ContentType="application/pdf")
     s3.Bucket(custombucket).put_object(Key=stud_form_file_name, Body=com_form, ContentType="application/pdf")
+    s3.Bucket(custombucket).put_object(Key=pfp_file_name, Body=pfp, ContentType="img/png")
     return redirect(url_for('student.profile'))
 
 @student_bp.route('/get_lecturer_email')
