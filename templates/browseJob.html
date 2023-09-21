@@ -181,40 +181,40 @@
     <nav class="navbar">
         <div class="navdiv">
             <div class="logo" style="width: 134.5rem;">
-                <a href="index.html"><img src="assets/img/TARUMT.png" alt="" class="img-fluid"></a>
+                <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>
             </div>
             <ul class="ml-auto">    
-                <li><a href="student.html" >Home</a></li>
-                <li><a href="index.html"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                <li><a href="/student" >Home</a></li>
+                <li><a href="/student/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
             </ul>
         </div>
     </nav>
 
 <div class="wrap">
     <div class="upload">
-        <img id="preview" src="assets/img/noprofil.jpg" width="100" height="100" alt="">
+        <img id="preview" src="{{ company_pic }}" width="100" height="100" alt="">
       </div>
 
     <div class="greetings">
-        <p><strong>Giordano Sdn Bhd</strong></p>
+        <p><strong>{{ company_name }}</strong></p>
     </div>
 
     <div class="container">
-        <h4>Senior Manager - DAT Process Assurance, IT Audit</h4> <!-- Job Title -->
-        <p>PwC Malaysia · Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia</p> <!-- address -->
+        <h4>{{ job_title }}</h4> <!-- Job Title -->
+        <p>{{ company_address }}</p> <!-- address -->
         <h5 class="mb-2">Contact Company</h5>
         <div class="company">
             <div class="info-pair">
                 <label for="person-in-charge">Person In-Charge</label>
-                <p>Irene Lau</p>
+                <p>{{ pic }}</p>
             </div>
             <div class="info-pair">
                 <label for="hr_email">HR Email</label>
-                <p>irene123@gmail.com</p>
+                <p>{{ email }}</p>
             </div>
             <div class="info-pair">
                 <label for="hr_contact">HR Contact</label>
-                <p>011-10293345</p>
+                <p>{{ hr }}</p>
             </div>
         </div>
             
@@ -222,47 +222,47 @@
         <div class="company">
             <div class="info-pair">
                 <label for="job_position">Job Position</label>
-                <p>Intern</p>
+                <p>{{ position }}</p>
             </div>
             <div class="info-pair">
                 <label for="description">Job Description</label>
-                <p>Information Technology General Controls (ITGC), ITGC, IT General Controls (ITGC)</p>
+                <p><a href="{{ describe }}">Job Description.txt</a></p>
             </div>
             <div class="info-pair">
                 <label for="education_level">Education Level</label>
-                <p>Degree</p>
+                <p>{{ education }}</p>
             </div>
             <div class="info-pair">
                 <label for="accomodation">Accomodation</label>
-                <p>Yes</p>
+                <p>{{ accomodation }}</p>
             </div>
             <div class="info-pair">
                 <label for="transport">Transport</label>
-                <p>Yes</p>
+                <p>{{ transport }}</p>
             </div>
             <div class="info-pair">
                 <label for="laptop">Laptop</label>
-                <p>Yes</p>
+                <p>{{ laptop }}</p>
             </div>
             <div class="info-pair">
                 <label for="work_time">Work Time</label>
                 <div id="time-input-container" class="label-input-container">
-                    <input type="time" id="appt_start" name="appt_start">
+                    <input type="time" id="appt_start" name="appt_start" value="{{ start_time }}" disabled>
                     <p i="app">to</p>
-                    <input type="time" id="appt_end" name="appt_end">
+                    <input type="time" id="appt_end" name="appt_end" value="{{ start_time }}" disabled>
                 </div>
             </div>
             <div class="info-pair">
                 <label for="work_hours">Work Hours</label>
-                <p>8 hours</p>
+                <p>{{ hours }}</p>
             </div>
             <div class="info-pair">
                 <label for="work_environment">Work Environment</label>
-                <p>On-site</p>
+                <p>{{ environment }}</p>
             </div>
             <div class="info-pair">
                 <label for="allowance">Monthly Allowance</label>
-                <p>800</p>
+                <p>{{ allowance }}</p>
             </div>
         </div>
     </div>
