@@ -211,8 +211,8 @@ def studJob():
         user_data_dict = {
             "company_name": row[0],
             "job_title": row[2],
-            "job_link": row[2],
+            "job_link": row[3],
             "company_img" : company_img
         }
         user_data_list.append(user_data_dict)
-    return render_template('studentView.html')
+    return render_template('studentView.html', card_data=user_data_list)
