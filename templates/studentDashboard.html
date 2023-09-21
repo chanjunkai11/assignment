@@ -186,6 +186,39 @@
             font-weight: bold;
             margin-right: 25px;
         }
+        .upload_image{
+        width: 100px;
+        position: relative;
+        margin-top: 50px;
+        margin-left: 340px;
+        }
+        .upload_image img{
+        border-radius: 50%;
+        border: 6px solid #eaeaea;
+        }
+
+        .upload_image .round{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #00B4FF;
+        width: 32px;
+        height: 32px;
+        line-height: 33px;
+        text-align: center;
+        border-radius: 50%;
+        overflow: hidden;
+        }
+
+        .upload_image .round input[type = "file"]{
+        position: absolute;
+        transform: scale(2);
+        opacity: 0;
+        }
+
+        input[type=file]::-webkit-file-upload-button{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -204,6 +237,12 @@
 <form action="/student/submitDetail" method = "POST" enctype="multipart/form-data">
     <div class="container">
         <div class="greetings">
+            <div class="upload_image">
+                <img id="preview" src="/assets/img/noprofil.jpg" width="100" height="100" alt="">
+                <div class="round">
+                  <input type="file" id="imageInput" accept="image/*">
+                  <i class="fa fa-camera" style="color: #fff;"></i>
+            </div>
             <h4>Welcome: {{ name }}</h4>
         </div>
 
@@ -417,6 +456,36 @@
                     console.error('Error:', error);
                 });
         }
+
+        const imageInput = document.getElementById('imageInput');
+        const preview = document.getElementById('preview');
+    
+        // Add an event listener to the file input
+        imageInput.addEventListener('change', function() {
+        const file = this.files[0]; // Get the selected file
+    
+        if (file) {
+            // Check if the selected file is a PNG image
+            if (file.type === 'image/png') {
+            // Create a FileReader to read the file
+            const reader = new FileReader();
+    
+            reader.onload = function(e) {
+                // Set the src attribute of the image to the data URL
+                preview.src = e.target.result;
+            };
+    
+            // Read the file as a data URL
+            reader.readAsDataURL(file);
+            } else {
+            // If the selected file is not a PNG image, display an error message or take appropriate action.
+            alert('Please select a PNG image file.');
+            // You can choose to clear the input or handle the error in another way.
+            // For example, to clear the input:
+            imageInput.value = '';
+            }
+        }
+        });
     </script>
 </body>
 </html>
