@@ -105,6 +105,7 @@ def lecView(username):
     }
     legal_link = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[0] + "_legal_file.pdf"
     epf_link = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[0] + "_epf_file.pdf"
+    pfp = 
     return render_template('adminCompanyView.html', **user_data,legal_pdf=legal_link, epf_pdf=epf_link)
 
 @admin_bp.route('/update_status', methods=['POST'])
