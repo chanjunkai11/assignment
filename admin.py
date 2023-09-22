@@ -103,31 +103,9 @@ def lecView(username):
         'hq' : user_data1[6],
         'hr' : user_data1[7],
     }
-
-    query = "SELECT * FROM job_portal WHERE company_id = %s"
-    cursor.execute(query, (user_data1[0],))
-    user_data2 = cursor.fetchone()
-    cursor.close()
-    hours = int(user_data2[8])
-    minutes = int((user_data2[8] - hours) * 60)
-    hours = f"{hours} hour(s) {minutes} minutes"
-    accomodation_value = True if user_data2[3] else False
-    transport_value = True if user_data2[4] else False
-    laptop_value = True if user_data2[5] else False
-    user_data2 = {
-        "education" : user_data2[2],
-        "accomodation" : accomodation_value,
-        "transport" : transport_value,
-        "laptop" : laptop_value,
-        "start_time" : format_timedelta(user_data2[6]),
-        "end_time" : format_timedelta(user_data2[7]),
-        "hours" : hours,
-        "environment" : user_data2[9],
-        "allowance" : user_data2[10]
-    }
     legal_link = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[0] + "_legal_file.pdf"
     epf_link = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[0] + "_epf_file.pdf"
-    return render_template('adminCompanyView.html', **{**user_data, **user_data2},legal_pdf=legal_link, epf_pdf=epf_link)
+    return render_template('adminCompanyView.html', **user_data,legal_pdf=legal_link, epf_pdf=epf_link)
 
 @admin_bp.route('/update_status', methods=['POST'])
 def update_status():
