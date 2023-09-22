@@ -105,3 +105,16 @@ def lecView(username):
     resume_link = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + user_data1[0] + "_resume_file.pdf"
     com_link = "https://" + bucket + ".s3.amazonaws.com/" + "stud-id-" + user_data1[0] + "_form_file.pdf"
     return render_template('lecturerStudentView.html', **{**user_data, **user_data2, **user_data3}, name=name, resume_pdf=resume_link, company_pdf=com_link)
+
+@lecturer_bp.route('/update_status', methods=['POST'])
+def update_status():
+    student_id = request.form.get('student_id')
+    new_status = request.form.get('status')
+
+    cursor = db_conn.cursor()
+    update_sql = "UPDATE student SET approved_status = %s WHERE stud_id = %s"
+    cursor.execute(update_sql, (new_status, student_id))
+    db_conn.commit()
+    cursor.close()
+    response = {'message': 'Status updated successfully'}
+    return jsonify(response)
