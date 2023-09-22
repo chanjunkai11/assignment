@@ -13,52 +13,125 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style> 
        .nav-link {
-        font-weight: bold;
+            font-weight: bold;
         }
         .navbar {
-            background: whitesmoke;
-            font-family: Arial, Helvetica, sans-serif;
-            padding-right: 15px;
-            padding-left: 15px;
-            top: 0;
-            left: 0;
+                background: whitesmoke;
+                font-family: Arial, Helvetica, sans-serif;
+                padding-right: 15px;
+                padding-left: 15px;
+                top: 0;
+                left: 0;
         }
         .navdiv{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
         }
         .logo img{
-            width: 20rem;
-            top:0;
-            left: 220px;
-            margin-right: -200px;
+                width: 20rem;
+                top:0;
+                left: 220px;
+                margin-right: -200px;
         }
         li {
-            list-style: none;
-            display: inline-block;
+                list-style: none;
+                display: inline-block;
         }
         li a{
-            color:black;
-            font-size: 18px;
-            font-weight: bold;
-            margin-right: 25px;
+                color:black;
+                font-size: 18px;
+                font-weight: bold;
+                margin-right: 25px;
         }
-      .table-container {
-        margin-left: 140px;
-        margin-right: 190px;
-      }
-      .greetings h4 {
-            font-family: Trebuchet MS, sans-serif;
-            text-align: left;
-            font-weight: bold;
-            font-style: normal;
-            margin-top: 50px;
-            margin-left: 60px;
-            padding-bottom: 3px;
+        .table-container {
+            margin-left: 140px;
+            margin-right: 190px;
+        }
+        .greetings h4 {
+                font-family: Trebuchet MS, sans-serif;
+                text-align: left;
+                font-weight: bold;
+                font-style: normal;
+                margin-top: 30px;
+                margin-left: 60px;
+                padding-bottom: 3px;
         }
         #status {
           padding-right: 10px;  
+        }
+        .searchBar{
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            margin-right: 100px;
+            margin-left: 25px;
+        }            
+        .searchBar li{
+             list-style: none;
+             text-align: center;
+             display: inline-block;
+             margin: 20px;                
+        }
+        .searchBar li:hover button{
+            border: none;
+            border-bottom: solid;
+            border-color: #8B0000;
+        } 
+        .searchBar button{
+            border: none;
+            border-bottom: solid;
+            border-color: transparent;
+        }
+        .searchBar button, .dropdown{
+            cursor: pointer;
+            background-color: transparent;
+            font-weight: 600;   
+            font-family: 'Arial narrow';
+            font-size: 18px;                   
+            letter-spacing: 2px;
+        }  
+        #example_paginate .paginate_button.next a {
+            background-color: #800000 !important;
+            color: white !important;
+        }
+
+        #example_paginate .paginate_button.previous a {
+            background-color: #800000 !important; /* Use the original color of the Previous button */
+            color: white !important;
+        }
+
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #800000;
+            border-color: #800000;
+         }
+
+        #example_paginate .paginate_button.previous a,
+        #example_paginate .paginate_button.current a,
+        #example_paginate .paginate_button.next a {
+            background-color: #800000 !important;
+            color: white !important;
+            border-color: #800000 !important;
+        } 
+        #status{
+            box-sizing: border-box;
+            border-radius: 30px;
+            width: 40%;
+            padding: 5px;
+        } 
+        h5 {
+            color: #fff;
+            margin-top: 40px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            text-decoration: underline;
+            background-color: #800000; 
+            padding: 8px; 
+            width: 15%;
+            text-align: center;
+            margin-left: 60px;
         }
     </style>
   </head>
@@ -75,7 +148,18 @@
         </div>
     </nav>
     <div class="greetings">
+        <h5 class="mb-2">Admin Dashboard</h5>
         <h4>Welcome: Mr.{{ admin_name }}</h4>
+    </div>
+    <div class="filter">
+        <div class="searchBar">     
+            <ul>
+                <li><button type="submit" name="category" value="all">ALL</button></li>
+                <li><button type="submit" name="category" value="approved">Approved</button></li>
+                <li><button type="submit" name="category" value="pending">Pending</button></li>
+                <li><button type="submit" name="category" value="reject">Reject</button></li>
+            </ul>
+        </div>
     </div>
     <div class="table-container py-5">
         <div class="row">
@@ -132,5 +216,31 @@
         });
       }
   </script>  
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get references to the buttons and the items to be filtered
+            const buttons = document.querySelectorAll(".filter button");
+            const items = document.querySelectorAll(".table tbody tr");
+    
+            // Add click event listeners to the buttons
+            buttons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    const category = button.value.toLowerCase();
+    
+                    // Loop through the items and show/hide based on the selected category
+                    items.forEach(function (item) {
+                        const status = item.querySelector("select").value.toLowerCase();
+    
+                        // If "ALL" is selected, show all items; otherwise, filter by category
+                        if (category === "all" || category === status) {
+                            item.style.display = "table-row";
+                        } else {
+                            item.style.display = "none";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
   </body>
 </html>
