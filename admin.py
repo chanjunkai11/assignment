@@ -104,7 +104,7 @@ def lecView(username):
         'hr' : user_data1[7],
     }
     company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data1[0]) + "_pfp_img.png"
-    key = "com-id-" + str(user_data2[1]) + "_pfp_img.png"
+    key = "com-id-" + str(user_data1[0]) + "_pfp_img.png"
     s3 = boto3.resource('s3')
     try:
         s3.Object(bucket, key).load()
