@@ -42,10 +42,10 @@
             color:black;
             font-size: 18px;
             font-weight: bold;
-            margin-right: 25px;
+            margin-right: 10px;
+            padding-right: 187x;
         }
       .table-container {
-        /* margin-top: 2px; */
         margin-left: 130px;
         margin-right: 130px;
       }
@@ -54,10 +54,83 @@
             text-align: left;
             font-weight: bold;
             font-style: normal;
-            margin-top: 50px;
+            margin-top: 30px;
             margin-left: 60px;
             padding-bottom: 3px;
         }
+        #example_paginate .paginate_button.next a {
+            background-color: #800000 !important;
+            color: white !important;
+        }
+
+        /* Change the color of the Previous button */
+        #example_paginate .paginate_button.previous a {
+            background-color: #800000 !important; /* Use the original color of the Previous button */
+            color: white !important;
+        }
+
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #800000;
+            border-color: #800000;
+        }
+        #example_paginate .paginate_button.previous a,
+        #example_paginate .paginate_button.current a,
+        #example_paginate .paginate_button.next a {
+            background-color: #800000 !important;
+            color: white !important;
+            border-color: #800000 !important;
+        }
+        h5 {
+            color: #fff;
+            margin-top: 40px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            text-decoration: underline;
+            background-color: #800000; 
+            padding: 8px; 
+            width: 15%;
+            text-align: center;
+            margin-left: 60px;
+        }  
+        .searchBar{
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            margin-right: 100px;
+            margin-left: 25px;
+        }            
+        .searchBar li{
+             list-style: none;
+             text-align: center;
+             display: inline-block;
+             margin: 20px;                
+        }
+        .searchBar li:hover button{
+            border: none;
+            border-bottom: solid;
+            border-color: #8B0000;
+        } 
+        .searchBar button{
+            border: none;
+            border-bottom: solid;
+            border-color: transparent;
+        }
+        .searchBar button, .dropdown{
+            cursor: pointer;
+            background-color: transparent;
+            font-weight: 600;   
+            font-family: 'Arial narrow';
+            font-size: 18px;                   
+            letter-spacing: 2px;
+        }
+        #status{
+            box-sizing: border-box;
+            border-radius: 30px;
+            width: 6    0%;
+            padding: 5px;
+        } 
     </style>
   </head>
   <body>
@@ -73,7 +146,18 @@
         </div>
     </nav>
     <div class="greetings">
+        <h5 class="mb-2">Lecturer Dashboard</h5>
         <h4>Welcome: Mr.{{ lecturer_name }}</h4>
+    </div>
+    <div class="filter">
+        <div class="searchBar">     
+            <ul>
+                <li><button type="submit" name="category" value="all">ALL</button></li>
+                <li><button type="submit" name="category" value="approved">Approved</button></li>
+                <li><button type="submit" name="category" value="pending">Pending</button></li>
+                <li><button type="submit" name="category" value="reject">Reject</button></li>
+            </ul>
+        </div>
     </div>
     <div class="table-container py-5">
         <div class="row">
@@ -85,6 +169,7 @@
                         <th>Email</th>
                         <th>Phone No.</th>
                         <th>Company Name</th>
+                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,6 +180,13 @@
                             <td>{{ item['email'] }}</td>
                             <td>{{ item['phone'] }}</td>
                             <td>{{ item['company'] }}</td>
+                          <td>
+                            <select id="status" class="input">
+                                <option value="Approved">Approved</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Reject">Reject</option>
+                            </select>
+                        </td>
                         </tr>
                     {% endfor %}
                     
@@ -111,7 +203,32 @@
     <script>
         new DataTable('#example');
     </script>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get references to the buttons and the items to be filtered
+            const buttons = document.querySelectorAll(".filter button");
+            const items = document.querySelectorAll(".table tbody tr");
+    
+            // Add click event listeners to the buttons
+            buttons.forEach(function (button) {
+                button.addEventListener("click", function () {
+                    const category = button.value.toLowerCase();
+    
+                    // Loop through the items and show/hide based on the selected category
+                    items.forEach(function (item) {
+                        const status = item.querySelector("select").value.toLowerCase();
+    
+                        // If "ALL" is selected, show all items; otherwise, filter by category
+                        if (category === "all" || category === status) {
+                            item.style.display = "table-row";
+                        } else {
+                            item.style.display = "none";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 
   </body>
 </html>
