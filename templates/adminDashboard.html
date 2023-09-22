@@ -178,9 +178,19 @@
                             <td>{{ item['address'] }}</td>
                             <td>
                                 <select id="status" class="input" onchange="status_update(this.options[this.selectedIndex].value, '{{item['id']}}')">
-                                    <option value="Pending">Pending</option>  
-                                    <option value="Approved">Approved</option>
-                                    <option value="Reject">Reject</option>
+                                    {% if item['user_role'] == "Pending" %}
+                                      <option value="Pending" selected>Pending</option>
+                                      <option value="Approved">Approved</option>
+                                      <option value="Reject">Reject</option>
+                                    {% elif item['user_role'] == "Approved" %}
+                                      <option value="Pending">Pending</option>
+                                      <option value="Approved" selected>Approved</option>
+                                      <option value="Reject">Reject</option>
+                                    {% else %}
+                                      <option value="Pending">Pending</option>
+                                      <option value="Approved">Approved</option>
+                                      <option value="Reject" selected>Reject</option>
+                                    {% endif %}
                                 </select>
                             </td>
                         </tr>
