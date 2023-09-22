@@ -45,11 +45,11 @@ def valLogin():
 def profile(username):
     cursor = db_conn.cursor()
     lec_name = "SELECT CONCAT(last_name, ' ', first_name) AS full_name FROM lecturer WHERE lec_id = %s"
-    stud_query = "SELECT CONCAT(student.last_name, ' ', student.first_name), student.stud_id, student.email, student.tel_num, company.company_name FROM lecturer INNER JOIN student ON student.supervisor_id = lecturer.lec_id INNER JOIN company ON student.company_id = company.company_id WHERE lec_id = %s"
+    stud_query = "SELECT CONCAT(student.last_name, ' ', student.first_name), student.stud_id, student.email, student.tel_num, company.company_name FROM lecturer INNER JOIN student ON student.supervisor_id = lecturer.lec_id INNER JOIN company ON student.company_id = company.company_id WHERE lec_id = %s AND student.uploaded = %s"
     cursor.execute(lec_name, (username,))
     name = cursor.fetchone()
 
-    cursor.execute(stud_query, (username,))
+    cursor.execute(stud_query, (username, 1))
     user_data1 = cursor.fetchall()
     cursor.close()
     
