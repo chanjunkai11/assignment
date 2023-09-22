@@ -45,7 +45,7 @@ def valLogin():
 def profile(username):
     cursor = db_conn.cursor()
     lec_name = "SELECT CONCAT(last_name, ' ', first_name) AS full_name FROM lecturer WHERE lec_id = %s"
-    stud_query = "SELECT CONCAT(student.last_name, ' ', student.first_name), student.stud_id, student.email, student.tel_num, company.company_name FROM lecturer INNER JOIN student ON student.supervisor_id = lecturer.lec_id INNER JOIN company ON student.company_id = company.company_id WHERE lec_id = %s AND student.uploaded = %s"
+    stud_query = "SELECT CONCAT(student.last_name, ' ', student.first_name), student.stud_id, student.email, student.tel_num, company.company_name, student.approved_status FROM lecturer INNER JOIN student ON student.supervisor_id = lecturer.lec_id INNER JOIN company ON student.company_id = company.company_id WHERE lec_id = %s AND student.uploaded = %s"
     cursor.execute(lec_name, (username,))
     name = cursor.fetchone()
 
@@ -60,7 +60,8 @@ def profile(username):
             "id": row[1],
             "email": row[2],
             "phone": row[3],
-            "company": row[4]
+            "company": row[4],
+            "user_role": row[5]
         }
         user_data_list.append(user_data_dict)
     return render_template('lecturerDashboard.html', lecturer_name=name[0], data_list=user_data_list)
