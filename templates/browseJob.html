@@ -14,7 +14,9 @@
        .navbar {
                 background: whitesmoke;
                 font-family: Arial, Helvetica, sans-serif;
-                padding: 15px;
+                padding-left: 84px;
+                padding-top: 15px;
+                padding-bottom: 15px;
                 top: 0;
                 left: 0;
             }
@@ -24,7 +26,7 @@
             left: 220px;
             margin-right: -200px;
         }
-        ul {
+        #nav_btn ul {
         list-style-type: none;
         margin: 0;
         padding-bottom: 3px;
@@ -33,17 +35,22 @@
         background-color: whitesmoke;
         }
 
-        li {
+        #nav_btn li {
         float: right;
+        display: inline-block;
         }
 
-        li a {
+        #nav_btn li a {
         display: block;
         color: black;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
         font-size: small;
+        }
+        #nav_btn li a:hover{
+            background-color: #800000;
+            color: white;
         }
         li a:hover:not(.active) {
         background-color: #800000;
@@ -191,13 +198,13 @@
     <nav class="navbar">
         <div class="navdiv">
             <div class="logo" style="width: 134.5rem;">
-                <ul>
+                <ul id="nav_btn">
                     <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>
-                    <li style="float:right"><a href="/student/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                    <li><a href="/student/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
                     <li><a href="/student/jobBrowsing">Job Browsed</a></li>
                     <li><a href="/student/applyJobDashboard">Job Applied</a></li>
-                    <li><a href="/student/profile">Profile</a></li>
-                  </ul>
+                    <li><a href="/student/profile">Profile</a></li>  
+                  </ul>  
             </div>
         </div>
     </nav>
