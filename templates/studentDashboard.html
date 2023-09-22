@@ -7,7 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> 
     <!-- Your custom CSS styles -->
     <style media="screen">
-        /* Your existing custom CSS styles */
         .container {
             width: 100%;
             max-width: 800px; /* Adjust as needed */
@@ -140,19 +139,26 @@
             font-size: 14px;
         }
         .submit #btn{
-            border: none;
-            outline: none;
             background: #800000;
-            border-radius: 5px;
+            border-radius: 30px;
             color: #fff;
             cursor: pointer;
             font-size: 20px;
-            margin-left: 600px;
-            width: 280px;
+            margin-left: 700px;
+            margin-top: 30px;
+            width: 120px;
+            padding: 8px;
         }
         .submit #btn:hover{
-            background-color: #800000;
-            opacity: 0.6;
+            box-sizing: border-box;
+            background-color: #fff;
+            color: black;
+            border-radius: 30px;
+            width: 120px;
+            margin-left: 700px;
+            margin-top: 30px;
+            font-size: 20px;
+            padding: 8px;
         }
         .navbar {
                 background: whitesmoke;
@@ -167,7 +173,7 @@
             left: 220px;
             margin-right: -200px;
         }
-        ul {
+        #nav_btn ul {
         list-style-type: none;
         margin: 0;
         padding-bottom: 3px;
@@ -176,11 +182,12 @@
         background-color: whitesmoke;
         }
 
-        li {
+        #nav_btn li {
         float: right;
+        display: inline-block;
         }
 
-        li a {
+        #nav_btn li a {
         display: block;
         color: black;
         text-align: center;
@@ -188,7 +195,12 @@
         text-decoration: none;
         font-size: small;
         }
-        li a:hover:not(.active) {
+        #nav_btn li a:hover:not(.active) {
+        background-color: #800000;
+        color: white;
+        text-decoration: none;
+        }
+        #nav-btn li a:hover:not(.active) {
         background-color: #800000;
         color: white;
         text-decoration: none;
@@ -232,16 +244,16 @@
     <nav class="navbar">
         <div class="navdiv">
             <div class="logo" style="width: 134.5rem;">
-                <ul>
-                    <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>\
-                    <li style="float:right"><a class="active" href="/student/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                <ul id="nav_btn">
+                    <a href="/"><img src="/assets/TARUMT.png" alt="" class="img-fluid"></a>
+                    <li><a href="/student/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
                     <li><a href="/student/jobBrowsing">Job Browsed</a></li>
                     <li><a href="/student/applyJobDashboard">Job Applied</a></li>
-                    <li><a href="/student/profile">Profile</a></li>
-                  </ul>
+                    <li><a href="/student/profile">Profile</a></li>  
+                  </ul>  
             </div>
         </div>
-    </nav>   
+    </nav>
     <hr>
 <form action="/student/submitDetail" method = "POST" enctype="multipart/form-data">
     <div class="container">
