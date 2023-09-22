@@ -121,8 +121,8 @@ def profile():
     cursor.execute(query)
     user_data2 = cursor.fetchall()
 
-    query = "SELECT company_name FROM company WHERE approved_status = 'Approved'"
-    cursor.execute(query)
+    query = "SELECT company_name FROM company WHERE approved_status = %s"
+    cursor.execute(query, ('Approved'))
     user_data3 = cursor.fetchall()
 
     cursor.close()
@@ -212,9 +212,9 @@ def registerAcc():
 
 @student_bp.route("/jobBrowsing", methods=['GET', 'POST'])
 def studJob():
-    select_sql = "SELECT company.company_name, company.company_id, job_portal.job_title, job_portal.job_id FROM job_portal INNER JOIN company ON job_portal.company_id = company.company_id WHERE company.approved_status = 'Approved'"
+    select_sql = "SELECT company.company_name, company.company_id, job_portal.job_title, job_portal.job_id FROM job_portal INNER JOIN company ON job_portal.company_id = company.company_id WHERE company.approved_status = %s"
     cursor = db_conn.cursor()
-    cursor.execute(select_sql)
+    cursor.execute(select_sql, ('Approved'))
     user_data = cursor.fetchall()
 
     select_sql = "SELECT CONCAT(first_name, ' ', last_name) FROM student WHERE stud_id = %s"
