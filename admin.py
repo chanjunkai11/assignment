@@ -4,6 +4,7 @@ import os
 from config import *
 import datetime
 import boto3
+import botocore.exceptions
 
 admin_bp = Blueprint('admin', __name__)
 
