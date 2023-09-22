@@ -103,10 +103,17 @@ def lecView(username):
         'hq' : user_data1[6],
         'hr' : user_data1[7],
     }
+    company_img = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + str(user_data1[0]) + "_pfp_img.png"
+    key = "com-id-" + str(user_data2[1]) + "_pfp_img.png"
+    s3 = boto3.resource('s3')
+    try:
+        s3.Object(bucket, key).load()
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == "404":
+            company_img = "/assets/img/noprofil.jpg"
     legal_link = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[0] + "_legal_file.pdf"
     epf_link = "https://" + bucket + ".s3.amazonaws.com/" + "com-id-" + user_data1[0] + "_epf_file.pdf"
-    pfp = 
-    return render_template('adminCompanyView.html', **user_data,legal_pdf=legal_link, epf_pdf=epf_link)
+    return render_template('adminCompanyView.html', **user_data,legal_pdf=legal_link, epf_pdf=epf_link, pfp = company_img)
 
 @admin_bp.route('/update_status', methods=['POST'])
 def update_status():
