@@ -68,7 +68,7 @@ def registerAcc():
 def profile(username):
     cursor = db_conn.cursor()
     admin_name = "SELECT CONCAT(last_name, ' ', first_name) AS full_name FROM admin WHERE admin_id = %s"
-    com_query = "SELECT company_name, company_id, address FROM company WHERE approved_status = 'Pending'"
+    com_query = "SELECT company_name, company_id, address, approved_status FROM company"
     cursor.execute(admin_name, (username,))
     name = cursor.fetchone()
 
@@ -81,7 +81,8 @@ def profile(username):
         user_data_dict = {
             "name": row[0],
             "id": row[1],
-            "address": row[2]
+            "address": row[2],
+            "user_role" : row[3]
         }
         user_data_list.append(user_data_dict)
     return render_template('adminDashboard.html', admin_name=name[0], data_list=user_data_list)
