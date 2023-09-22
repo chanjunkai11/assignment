@@ -70,8 +70,8 @@ def registerAcc():
 def profile(username):
     cursor = db_conn.cursor()
     admin_name = "SELECT CONCAT(last_name, ' ', first_name) AS full_name FROM admin WHERE admin_id = %s"
-    com_query = "SELECT company_name, company_id, address, approved_status FROM company"
-    cursor.execute(admin_name, (username,))
+    com_query = "SELECT company_name, company_id, address, approved_status FROM company WHERE uploaded = %s"
+    cursor.execute(admin_name, (username, 1))
     name = cursor.fetchone()
 
     cursor.execute(com_query)
