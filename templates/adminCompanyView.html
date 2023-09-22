@@ -286,7 +286,7 @@
     <hr>
     <div class="container">
         <div class="greetings">
-            <h2>Welcome: {{ company_name }}</h2><br>
+            <h2>{{ company_name }}</h2><br>
         </div>
             <!-- Row for Student Detail -->
         <div class="row">
@@ -308,89 +308,6 @@
                     <div class="label-input-container">
                         <label for="contact"><strong>HR Contact:</strong></label>
                         <input type="text" class="input" id="contact" required="" autocomplete="off" value="{{ hr }}" readonly>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Separate container for Supervisor -->
-    <div class="container">
-        <!-- Row for Supervisor -->
-        <div class="row">
-            <div class="col-md-6 supervisor-heading">
-                <h5 class="mb-2">Job Description</h5>
-                <div class="card">
-                    <div class="label-input-container">
-                        <label for="description"><strong>Description:</strong></label>
-                        <textarea id="description" name="description" rows="4" cols="103">
-                        </textarea>
-                    </div>
-                    <div class="label-input-container">
-                        <label for="education_level">Education Level:</label>
-                        <input type="text" id="education_level" value="{{ education }}" readonly>
-                    </div>
-                    <div class="label-input-container">
-                        <label for="accomodation">Accomodation:</label>
-                        {% if accomodation%}
-                            <input type="radio" id="accomodation" name="accomodation" value="Yes" disabled checked>
-                            <label for="accomodation">Yes</label>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="accomodation" name="accomodation" value="No" disabled>
-                            <label for="accomodation">No</label>
-                        {% else %}
-                            <input type="radio" id="accomodation" name="accomodation" value="Yes" disabled>
-                            <label for="accomodation">Yes</label>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" id="accomodation" name="accomodation" value="No" disabled checked>
-                            <label for="accomodation">No</label>
-                        {% endif %}
-                    </div>
-                    <div class="label-input-container">
-                        <label for="transport">Transport:</label>
-                        &nbsp;
-                        {% if transport%}
-                            <input type="radio" id="transport" name="transport" value="Yes" disabled checked>
-                            <label for="transport">Yes</label>
-                            <input type="radio" id="transport" name="transport" value="No" disabled>
-                            <label for="transport">No</label>
-                        {% else %}
-                            <input type="radio" id="transport" name="transport" value="Yes" disabled>
-                            <label for="transport">Yes</label>
-                            <input type="radio" id="transport" name="transport" value="No" disabled checked>
-                            <label for="transport">No</label>
-                        {% endif %}
-                    </div>
-                    <div class="label-input-container">
-                        <label for="laptop">Laptop:</label>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        {% if laptop%}
-                            <input type="radio" id="laptop" name="laptop" value="Yes" disabled checked>
-                            <label for="laptop">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="radio" id="laptop" name="laptop" value="No" disabled>
-                            <label for="laptop">No</label>
-                        {% else %}
-                            <input type="radio" id="laptop" name="laptop" value="Yes" disabled>
-                            <label for="laptop">Yes</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="radio" id="laptop" name="laptop" value="No" disabled checked>
-                            <label for="laptop">No</label>
-                        {% endif %}
-                    </div>
-                    <div class="label-input-container">
-                        <label for="appt">Work time:</label>
-                        <div id="time-input-container" class="label-input-container">
-                            <input type="time" id="appt_start" name="appt_start" value="{{ start_time }}" disabled>
-                            <p class="app" style="font-size: small;">to&nbsp; &nbsp;&nbsp;  </p>
-                            <input type="time" id="appt_end" name="appt_end" value="{{ end_time }}" disabled>
-                        </div>
-                        <label for="hours"><strong>Work Hours:</strong></label>
-                        <input type="text" class="input" id="hours" autocomplete="off" name="hours" value="{{ hours }}" readonly>
-                    </div>          
-                    <div class="label-input-container">
-                        <label for="environment">Working Environment:</label>
-                        <input type="text" id="environment" value="{{ environment }}" readonly>
-                    </div>
-                    <div class="label-input-container">
-                        <label for="monthly_allowance"><strong>Monthly Allowance:</strong></label>
-                        <input type="text" class="input" id="monthly_allowance" autocomplete="off" name="allowance" value="{{ allowance }}" readonly>
                     </div>
                 </div>
             </div>
