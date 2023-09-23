@@ -93,7 +93,8 @@ def dashboard():
         'address' : user_data1[2],
         'hq' : user_data1[6],
         'hr' : user_data1[7],
-        'pic': user_data1[9]
+        'pic': user_data1[9],
+        'status' : user_data1[8]
     }
 
     query = "SELECT job_title, position, education, allowance, job_id FROM job_portal WHERE company_id = %s"
