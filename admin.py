@@ -71,10 +71,10 @@ def profile(username):
     cursor = db_conn.cursor()
     admin_name = "SELECT CONCAT(last_name, ' ', first_name) AS full_name FROM admin WHERE admin_id = %s"
     com_query = "SELECT company_name, company_id, address, approved_status FROM company WHERE uploaded = %s"
-    cursor.execute(admin_name, (username, 1))
+    cursor.execute(admin_name, (username))
     name = cursor.fetchone()
 
-    cursor.execute(com_query)
+    cursor.execute(com_query, (1))
     user_data1 = cursor.fetchall()
     cursor.close()
 
