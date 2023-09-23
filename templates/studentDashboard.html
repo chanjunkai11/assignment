@@ -172,72 +172,72 @@
             top:0;
             left: 220px;
             margin-right: -200px;
-        }
-        #nav_btn ul {
-        list-style-type: none;
-        margin: 0;
-        padding-bottom: 3px;
-        padding-left: 20px;
-        overflow: hidden;
-        background-color: whitesmoke;
-        }
-
-        #nav_btn li {
-        float: right;
-        display: inline-block;
-        }
-
-        #nav_btn li a {
-        display: block;
-        color: black;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: small;
-        }
-        #nav_btn li a:hover:not(.active) {
-        background-color: #800000;
-        color: white;
-        text-decoration: none;
-        }
-        #nav-btn li a:hover:not(.active) {
-        background-color: #800000;
-        color: white;
-        text-decoration: none;
-        }
-        .upload_image{
-        width: 100px;
-        position: relative;
-        margin-top: 50px;
-        margin-left: 340px;
-        }
-        .upload_image img{
-        border-radius: 50%;
-        border: 6px solid #eaeaea;
-        }
-
-        .upload_image .round{
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background: #00B4FF;
-        width: 32px;
-        height: 32px;
-        line-height: 33px;
-        text-align: center;
-        border-radius: 50%;
-        overflow: hidden;
-        }
-
-        .upload_image .round input[type = "file"]{
-        position: absolute;
-        transform: scale(2);
-        opacity: 0;
-        }
-
-        input[type=file]::-webkit-file-upload-button{
-            cursor: pointer;
-        }
+            }
+            #nav_btn ul {
+            list-style-type: none;
+            margin: 0;
+            padding-bottom: 3px;
+            padding-left: 20px;
+            overflow: hidden;
+            background-color: whitesmoke;
+            }
+    
+            #nav_btn li {
+            float: right;
+            display: inline-block;
+            }
+    
+            #nav_btn li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: small;
+            }
+            #nav_btn li a:hover:not(.active) {
+            background-color: #800000;
+            color: white;
+            text-decoration: none;
+            }
+            #nav-btn li a:hover:not(.active) {
+            background-color: #800000;
+            color: white;
+            text-decoration: none;
+            }
+            .upload_image{
+            width: 100px;
+            position: relative;
+            margin-top: 50px;
+            margin-left: 340px;
+            }
+            .upload_image img{
+            border-radius: 50%;
+            border: 6px solid #eaeaea;
+            }
+    
+/*             .upload_image .round{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #00B4FF;
+            width: 32px;
+            height: 32px;
+            line-height: 33px;
+            text-align: center;
+            border-radius: 50%;
+            overflow: hidden;
+            }
+    
+            .upload_image .round input[type = "file"]{
+            position: absolute;
+            transform: scale(2);
+            opacity: 0;
+            } */
+    
+            input[type=file]::-webkit-file-upload-button{
+                cursor: pointer;
+            }
     </style>
 </head>
 <body>
@@ -264,7 +264,7 @@
                   <input type="file" id="imageInput" accept="image/*" name="pfp">
                   <i class="fa fa-camera" style="color: #fff;"></i>
             </div>
-            <h4>Welcome: {{ name }}</h4>
+            <h4>Welcome, {{ name }}</h4>
         </div>
 
             <!-- Row for Student Detail -->
