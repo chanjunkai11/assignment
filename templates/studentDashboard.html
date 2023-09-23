@@ -7,173 +7,154 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> 
     <!-- Your custom CSS styles -->
     <style media="screen">
-        .container {
-            width: 100%;
-            max-width: 800px; /* Adjust as needed */
-            margin: 20px auto;
-            padding: 20px;
-            border: 2px solid #ccc; /* Border style */
-            border-radius: 10px; /* Rounded corners */
-            background-color: whitesmoke;
-        }
-
-        .greetings h4 {
-            font-family: Georgia, 'Times New Roman', Times, serif;
-            text-align: center;
-        }
-
-        .card {
-            margin-bottom: 3px;
-            padding-bottom: 1px;
-            padding-top: 20px;
-            padding-left: 15px;
-            padding-right: 15px; /* Added right padding to cards */
-            border: 1px solid #ddd; /* Border for individual cards */
-            border-radius: 5px; /* Rounded corners for cards */
-            background-color: white;
-            width: 208%;
-        }
-        .row h5 {
-            color: #fff;
-            margin-top: 0; /* Adjust margin to make it closer to content */
-            font-size: 20px; /* Adjust the font size for headings */
-            font-weight: bold; /* Make headings bold */
-            background-color: #800000; /* Highlighted background color */
-            padding: 8px; /* Adjust padding as needed */
-            width: 208%;
-        }
-
-        /* Style for Supervisor heading */
-        .supervisor-heading h5 {
-            margin-top: 0; /* Adjust margin to make it closer to content */
-        }
-
-        /* Style for the update button */
-        .update-button {
-            display: block;
-            margin: 10px auto; /* Center the button horizontally */
-            background-color: #800000;
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.3s; /* Add transition effect */
-        }
-
-        /* Change button background on hover */
-        .update-button:hover {
-            background-color: whitesmoke; /* Change to a different color on hover */
-            color: #000;
-        }
-
-        /* Style for labels and input fields */
-        .label-input-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .label-input-container label {
-            flex: 1;
-            text-align: left;
-            margin-right: 10px;
-            font-size: small;
-        }
-
-        .label-input-container input, .label-input-container select {
-            flex: 2;
-            padding: 1px;
-            padding-left: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 15px;
-        }
-        .upload label{
-            font-size: small;
-        }
-        #custom-button {
-            padding: 5px;
-            color: white;
-            background-color: #800000;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: 164px;
-        }
-
-        #custom-button:hover {
-            background-color: #800000;
-            opacity: 0.6;
-        }
-
-        #custom-text {
-            margin-left: 10px;
-            font-family: sans-serif;
-            color: #aaa;
-            font-size: 14px;
-        }
-        #custom-button2 {
-            padding: 5px;
-            color: white;
-            background-color: #800000;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: 35px;
-        }
-
-        #custom-button2:hover {
-            background-color: #800000;
-            opacity: 0.6;
-        }
-
-        #custom-text2 {
-            margin-left: 10px;
-            font-family: sans-serif;
-            color: #aaa;
-            font-size: 14px;
-        }
-        .submit #btn{
-            background: #800000;
-            border-radius: 30px;
-            color: #fff;
-            cursor: pointer;
-            font-size: 20px;
-            margin-left: 700px;
-            margin-top: 30px;
-            width: 120px;
-            padding: 8px;
-        }
-        .submit #btn:hover{
-            box-sizing: border-box;
-            background-color: #fff;
-            color: black;
-            border-radius: 30px;
-            width: 120px;
-            margin-left: 700px;
-            margin-top: 30px;
-            font-size: 20px;
-            padding: 8px;
-        }
-        .navbar {
-                background: whitesmoke;
-                font-family: Arial, Helvetica, sans-serif;
-                padding: 15px;
-                top: 0;
-                left: 0;
+            .container {
+                width: 100%;
+                max-width: 800px; /* Adjust as needed */
+                margin: 20px auto;
+                padding: 20px;
+                border: 2px solid #ccc; /* Border style */
+                border-radius: 10px; /* Rounded corners */
+                background-color: whitesmoke;
             }
-        .logo img{
-            width: 20rem;
-            top:0;
-            left: 220px;
-            margin-right: -200px;
+    
+            .greetings h4 {
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                text-align: center;
             }
-            #nav_btn ul {
+    
+            .card {
+                margin-bottom: 3px;
+                padding-bottom: 1px;
+                padding-top: 20px;
+                padding-left: 15px;
+                padding-right: 15px; /* Added right padding to cards */
+                border: 1px solid #ddd; /* Border for individual cards */
+                border-radius: 5px; /* Rounded corners for cards */
+                background-color: white;
+                width: 208%;
+            }
+            .row h5 {
+                color: #fff;
+                margin-top: 0; /* Adjust margin to make it closer to content */
+                font-size: 20px; /* Adjust the font size for headings */
+                font-weight: bold; /* Make headings bold */
+                background-color: #800000; /* Highlighted background color */
+                padding: 8px; /* Adjust padding as needed */
+                width: 208%;
+            }
+    
+            /* Style for Supervisor heading */
+            .supervisor-heading h5 {
+                margin-top: 0; /* Adjust margin to make it closer to content */
+            }
+    
+            /* Style for labels and input fields */
+            .label-input-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+    
+            .label-input-container label {
+                flex: 1;
+                text-align: left;
+                margin-right: 10px;
+                font-size: small;
+            }
+    
+            .label-input-container input, .label-input-container select {
+                flex: 2;
+                padding: 1px;
+                padding-left: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 15px;
+            }
+            .upload label{
+                font-size: small;
+            }
+            #custom-button {
+                padding: 5px;
+                color: white;
+                background-color: #800000;
+                border: 1px solid #fff;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 12px;
+                margin-left: 164px;
+            }
+    
+            #custom-button:hover {
+                background-color: #800000;
+                opacity: 0.6;
+            }
+    
+            #custom-text {
+                margin-left: 10px;
+                font-family: sans-serif;
+                color: #aaa;
+                font-size: 14px;
+            }
+            #custom-button2 {
+                padding: 5px;
+                color: white;
+                background-color: #800000;
+                border: 1px solid #fff;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 12px;
+                margin-left: 35px;
+            }
+    
+            #custom-button2:hover {
+                background-color: #800000;
+                opacity: 0.6;
+            }
+    
+            #custom-text2 {
+                margin-left: 10px;
+                font-family: sans-serif;
+                color: #aaa;
+                font-size: 14px;
+            }
+            .submit #btn{
+                background: #800000;
+                border-radius: 30px;
+                color: #fff;
+                cursor: pointer;
+                font-size: 20px;
+                margin-left: 330px;
+                margin-top: 20px;
+                width: 120px;
+                padding: 8px;
+            }
+            
+            .submit #btn:hover{
+                box-sizing: border-box;
+                background-color: #fff;
+                color: black;
+                border-radius: 30px;
+                width: 120px;
+                margin-left: 330px;
+                margin-top: 20px;
+                font-size: 20px;
+                padding: 8px;
+            }
+            .navbar {
+                    background: whitesmoke;
+                    font-family: Arial, Helvetica, sans-serif;
+                    padding: 15px;
+                    top: 0;
+                    left: 0;
+                }
+            .logo img{
+                width: 20rem;
+                top:0;
+                left: 220px;
+                margin-right: -200px;
+            }
+            ul {
             list-style-type: none;
             margin: 0;
             padding-bottom: 3px;
@@ -182,12 +163,11 @@
             background-color: whitesmoke;
             }
     
-            #nav_btn li {
+            li {
             float: right;
-            display: inline-block;
             }
     
-            #nav_btn li a {
+            li a {
             display: block;
             color: black;
             text-align: center;
@@ -195,12 +175,7 @@
             text-decoration: none;
             font-size: small;
             }
-            #nav_btn li a:hover:not(.active) {
-            background-color: #800000;
-            color: white;
-            text-decoration: none;
-            }
-            #nav-btn li a:hover:not(.active) {
+            li a:hover:not(.active) {
             background-color: #800000;
             color: white;
             text-decoration: none;
@@ -216,7 +191,7 @@
             border: 6px solid #eaeaea;
             }
     
-/*             .upload_image .round{
+            .upload_image .round{
             position: absolute;
             bottom: 0;
             right: 0;
@@ -233,7 +208,7 @@
             position: absolute;
             transform: scale(2);
             opacity: 0;
-            } */
+            }
     
             input[type=file]::-webkit-file-upload-button{
                 cursor: pointer;
