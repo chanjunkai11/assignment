@@ -82,7 +82,8 @@ def profile():
         'ic' : user_data1[6],
         'email' : user_data1[5],
         'tel_num' : user_data1[4],
-        'address' : user_data1[3]
+        'address' : user_data1[3],
+        'status' : user_data1[10]
     }
 
     if user_data1[9] and updating is None:
